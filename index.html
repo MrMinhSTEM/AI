@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng Dụng AI Trong Học Ngoại Ngữ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            color: #444444;
+            line-height: 1.6;
+            background-color: #F9F9F9;
+        }
+
+        /* Navigation Menu */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #4A90E2; /* Bright blue color */
+            padding: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #357ABD; /* Darker blue on hover */
+            border-radius: 5px;
+        }
+
+        /* Slideshow Banner */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%; /* Max width to fit mobile devices */
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none; /* Hide all slides */
+            width: 100%;
+        }
+
+        .active {
+            display: block; /* Show the active slide */
+        }
+
+        .slideshow-image {
+            width: 100%; /* Ensure image takes 100% width of container */
+            height: auto;
+        }
+
+        /* Navigation dots */
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s;
+            cursor: pointer;
+        }
+
+        .active-dot {
+            background-color: #4A90E2; /* Color for active dot */
+        }
+
+        /* Introduction Section */
+        .introduction {
+            padding: 20px;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+
+        .introduction h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #4A90E2;
+        }
+
+        .introduction p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #444444;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 20px;
+            background-color: #F3F4F6; /* Light gray */
+            text-align: center;
+        }
+
+        .benefits h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4A90E2;
+        }
+
+        .benefit-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .benefit-item {
+            width: 300px;
+            background-color: #FFFFFF;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 1px solid #E1DFDD;
+        }
+
+        .benefit-item h3 {
+            margin-bottom: 10px;
+            color: #4A90E2;
+        }
+
+        .benefit-item p {
+            font-size: 0.95em;
+            color: #666666;
+        }
+
+        /* Speaker Section */
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .speaker-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E1DFDD;
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .speaker-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .speaker-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .quote-box {
+            background-color: #4A90E2; /* Bright blue color */
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9em;
+            margin-top: 15px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .quote-box::before, .quote-box::after {
+            content: '“';
+            font-size: 2em;
+            position: absolute;
+            color: white;
+        }
+
+        .quote-box::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .quote-box::after {
+            content: '”';
+            bottom: -10px;
+            right: -10px;
+        }
+
+        .speaker-name {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #444444;
+        }
+
+        .speaker-description {
+            font-size: 0.85em;
+            color: #666666;
+            margin-top: 5px;
+        }
+
+        /* Schedule Section */
+        .program-schedule {
+            padding: 20px;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+
+        .schedule-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .schedule-card {
+            background-color: #F3F4F6;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #E1DFDD;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #4A90E2;
+        }
+
+        .event {
+            color: #666666;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 20px;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+        /* Program Schedule Section */
+.program-schedule {
+    padding: 40px 20px;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+.program-schedule h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #0078D4;
+}
+
+.schedule-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.schedule-card {
+    background-color: #F3F2F1;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.schedule-card:hover {
+    transform: scale(1.05);
+}
+
+.time {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #0078D4;
+}
+
+.event {
+    font-size: 1.1em;
+    margin-top: 5px;
+    color: #333333;
+}
+         /* Định dạng cho thanh menu */
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #004080;
+            color: white;
+        }
+
+        /* Định dạng phần logo bên trái */
+        .menu .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        /* Định dạng phần văn bản ở giữa */
+        .menu .title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Định dạng cho các dòng chữ */
+        .menu .title .line1 {
+            font-size: 22px;
+        }
+
+        .menu .title .line2 {
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4A90E2;
+            color: white;
+        }
+
+    .introduction {
+        text-align: center; /* Căn giữa nội dung */
+        margin: 0 auto;    /* Tự động căn lề hai bên */
+        max-width: 800px;  /* Chiều rộng tối đa của nội dung */
+    }
+
+        /* Style chung cho toàn bộ khung */
+        /* Style chung cho toàn bộ khung */
+    .benefits-container {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .benefits-container h2 {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    /* Style cho từng mục lợi ích */
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        padding: 15px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 12px;
+        width: 100%;
+    }
+
+    /* Hiệu ứng sáng và phóng to khi di chuột */
+    .benefit-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Style cho ảnh và nội dung */
+    .benefit-item img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-right: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .benefit-item h4 {
+        margin: 0;
+        font-weight: bold;
+        color: #4CAF50;
+        text-align: left; /* Căn trái tiêu đề */
+    }
+
+    .benefit-item p {
+        margin: 5px 0 0;
+        font-size: 15px;
+        color: #666;
+        text-align: left; /* Căn trái mô tả */
+    }
+
+    /* Style cho nút Call to Action */
+    .cta-button {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .cta-button a {
+        text-decoration: none;
+        background-color: #1976D2;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .cta-button a:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Menu -->
+<!-- Phần menu -->
+<div style="display: flex; justify-content: center;">
+    <div style="position: relative; width: 80%; max-width: 800px; text-align: center; padding: 20px; border-radius: 8px; color: white; font-family: Arial, sans-serif; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);">
+        <!-- Background Image -->
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #007BFF, #20C997);
+            opacity: 0.8; 
+            z-index: -1;
+            border-radius: 8px;">
+        </div>
+
+        <!-- Main Content -->
+        <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;">
+            <div style="margin-right: 15px;">
+                <img src="image/logo.png" alt="Logo" style="width: 90px;">
+            </div>
+            <div style="text-align: left;">
+                <div style="font-size: 1.5em; font-weight: bold; text-align: center;">
+                    HỘI THẢO KHOA HỌC CẤP TRƯỜNG
+                </div>
+                <div style="font-size: 1.2em; font-style: italic; margin-top: 5px;">
+                    Chủ đề: "Ứng dụng trí tuệ nhân tạo vào dạy và học ngoại ngữ hiện nay"
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Introduction Section -->
+<div class="introduction" style="text-align: center;">
+    <h4>GIỚI THIỆU</h4>
+    <p>
+Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong lĩnh vực giáo dục, đặc biệt là trong việc dạy và học ngoại ngữ. Nhờ vào AI, người học có thể tận dụng các công cụ học tập cá nhân hóa, nhận diện và sửa lỗi tự động, cũng như cải thiện khả năng phát âm một cách hiệu quả. Đến với Hội thảo là các chuyên gia hàng đầu trong ngành và ngoài ngành Công an sẽ chia sẻ những tiến bộ mới nhất, những ứng dụng của AI trong việc nâng cao chất lượng dạy và học ngoại ngữ.
+    </p>
+</div>
+
+<div class="benefits-container">
+    <h2>LỢI ÍCH CỦA AI TRONG DẠY VÀ HỌC NGOẠI NGỮ</h2>
+
+    <!-- Item 1 -->
+    <div class="benefit-item">
+        <img src="image/canhanhoa.png" alt="Cá nhân hóa quá trình học tập">
+        <div>
+            <h4 style="color: #4CAF50;">Cá nhân hóa quá trình học tập</h4>
+            <p>AI điều chỉnh lộ trình học phù hợp với từng học viên, tăng hiệu quả học tập.</p>
+        </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="benefit-item">
+        <img src="image/giaotiep.jpg" alt="Cải thiện kỹ năng phát âm và giao tiếp">
+        <div>
+            <h4 style="color: #2196F3;">Cải thiện kỹ năng phát âm và giao tiếp</h4>
+            <p>Hỗ trợ phát âm chuẩn và nâng cao kỹ năng giao tiếp thực tế.</p>
+        </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="benefit-item">
+        <img src="image/tutin.jpg" alt="Tăng cường tự tin qua thực hành ngôn ngữ">
+        <div>
+            <h4 style="color: #FF4081;">Tăng cường tự tin qua thực hành ngôn ngữ</h4>
+            <p>Cung cấp môi trường luyện tập giúp học viên tự tin hơn.</p>
+        </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="benefit-item">
+        <img src="image/time.png" alt="Tiết kiệm thời gian học tập">
+        <div>
+            <h4 style="color: #FF9800;">Tiết kiệm thời gian học tập</h4>
+            <p>Giúp học viên tiếp thu kiến thức nhanh chóng và hiệu quả.</p>
+        </div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="benefit-item">
+        <img src="image/lotrinh.jpg" alt="Đưa ra lộ trình học hiệu quả hơn">
+        <div>
+            <h4 style="color: #9C27B0;">Đưa ra lộ trình học hiệu quả hơn</h4>
+            <p>Lập kế hoạch học phù hợp với khả năng của từng người.</p>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-button">
+        <a href="#">LET'S GO</a>
+    </div>
+</div>
+
+<!-- Speaker Section -->
+<div class="container">
+
+    <div class="speaker-card">
+        <img src="image/male.png" alt="Speaker 1">
+        <h3>Nguyễn Văn A</h3>
+        <div class="quote-box">
+            <p>"AI sẽ làm thay đổi cách chúng ta học và dạy ngoại ngữ."</p>
+        </div>
+        <div class="speaker-name">Nguyễn Văn A</div>
+        <div class="speaker-description">Chuyên gia AI tại Đại học B</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/male.png" alt="Speaker 2">
+        <h3>Trần Thị B</h3>
+        <div class="quote-box">
+            <p>"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
+        </div>
+        <div class="speaker-name">Trần Thị B</div>
+        <div class="speaker-description">Giáo viên tiếng Anh tại C</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/male.png" alt="Speaker 2">
+        <h3>Trần Thị B</h3>
+        <div class="quote-box">
+            <p>"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
+        </div>
+        <div class="speaker-name">Trần Thị B</div>
+        <div class="speaker-description">Giáo viên tiếng Anh tại C</div>
+    </div>
+        <div class="speaker-card">
+        <img src="image/male.png" alt="Speaker 2">
+        <h3>Trần Thị B</h3>
+        <div class="quote-box">
+            <p>"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
+        </div>
+        <div class="speaker-name">Trần Thị B</div>
+        <div class="speaker-description">Giáo viên tiếng Anh tại C</div>
+    </div>
+</div>
+
+<!-- Schedule Section -->
+<!-- Program Schedule Section -->
+<div class="program-schedule" id="schedule">
+
+    <div class="schedule-container">
+<div style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
+    <div style="width: 100%; max-width: 600px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; margin: auto;">
+        <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px; color: #333;">Chương Trình Hội Thảo</h2>
+
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">📚</div>
+            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">12:00</div>
+            <div style="color: #555; font-size: 14px;">Đón tiếp đại biểu và khai mạc hội thảo</div>
+        </div>
+
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">🎤</div>
+            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">13:00</div>
+            <div style="color: #555; font-size: 14px;">Phát biểu khai mạc và giới thiệu chương trình</div>
+        </div>
+
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">💼</div>
+            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">15:00</div>
+            <div style="color: #555; font-size: 14px;">Tham luận: Ứng dụng AI trong dạy và học ngoại ngữ</div>
+        </div>
+
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">🏆</div>
+            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">18:00</div>
+            <div style="color: #555; font-size: 14px;">Trao giải thưởng và tổng kết hội thảo</div>
+        </div>
+
+        <div style="display: flex; align-items: center;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">🍽️</div>
+            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">20:00</div>
+            <div style="color: #555; font-size: 14px;">Tiệc tối và giao lưu</div>
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<!-- bai viet-->
+<div style="max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
+    <h2 style="text-align: center; color: #333; font-size: 24px; font-weight: bold; margin-bottom: 20px;">CÁC BÀI VIẾT ĐĂNG KÝ YẾU HỘI THẢO</h2>
+    
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <button class="tab-link active" onclick="openTab(event, 'tab1')">Chủ đề 1</button>
+        <button class="tab-link" onclick="openTab(event, 'tab2')">Chủ đề 2</button>
+        <button class="tab-link" onclick="openTab(event, 'tab3')">Chủ đề 3</button>
+        <button class="tab-link" onclick="openTab(event, 'tab4')">Chủ đề 4</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="tab1" class="tab-content" style="display: block;">
+        <div class="row">
+            <div class="column author">Tác giả 1</div>
+            <div class="column article">Bài viết về chủ đề 1</div>
+        </div>
+        <div class="row">
+            <div class="column author">Tác giả 2</div>
+            <div class="column article">Bài viết về chủ đề 1</div>
+        </div>
+        <!-- Repeat for more articles -->
+    </div>
+
+    <div id="tab2" class="tab-content">
+        <div class="row">
+            <div class="column author">Tác giả 1</div>
+            <div class="column article">Bài viết về chủ đề 2</div>
+        </div>
+        <div class="row">
+            <div class="column author">Tác giả 2</div>
+            <div class="column article">Bài viết về chủ đề 2</div>
+        </div>
+        <!-- Repeat for more articles -->
+    </div>
+
+    <div id="tab3" class="tab-content">
+        <div class="row">
+            <div class="column author">Tác giả 1</div>
+            <div class="column article">Bài viết về chủ đề 3</div>
+        </div>
+        <div class="row">
+            <div class="column author">Tác giả 2</div>
+            <div class="column article">Bài viết về chủ đề 3</div>
+        </div>
+        <!-- Repeat for more articles -->
+    </div>
+
+    <div id="tab4" class="tab-content">
+        <div class="row">
+            <div class="column author">Tác giả 1</div>
+            <div class="column article">Bài viết về chủ đề 4</div>
+        </div>
+        <div class="row">
+            <div class="column author">Tác giả 2</div>
+            <div class="column article">Bài viết về chủ đề 4</div>
+        </div>
+        <!-- Repeat for more articles -->
+    </div>
+</div>
+
+<style>
+    .tab-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .tab-link {
+        background-color: #f1f1f1;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 8px 8px 0 0;
+        margin-right: 5px;
+    }
+
+    .tab-link:hover {
+        background-color: #ddd;
+    }
+
+    .tab-link.active {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .tab-content {
+        display: none;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .row {
+        display: flex;
+        padding: 8px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .column {
+        padding: 5px;
+        font-size: 16px;
+    }
+
+    .author {
+        width: 30%;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .article {
+        width: 70%;
+    }
+
+    .tab-content .row:last-child {
+        border-bottom: none;
+    }
+</style>
+
+<script>
+    function openTab(evt, tabId) {
+        var i, tabcontent, tablinks;
+
+        // Hide all tab contents
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Remove "active" class from all tab links
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the selected tab content and add "active" class to the clicked tab
+        document.getElementById(tabId).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+
+<footer>
+    <p>© 2024 Hội Thảo Ứng Dụng AI- Khoa Ngoại ngữ - Tin học, Trường Cao đẳng CSND I.</p>
+</footer>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = (i === index) ? 'block' : 'none';
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    showSlide(currentSlide);
+    setInterval(nextSlide, 3000);
+</script>
+
+</body>
+</html>
