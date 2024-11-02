@@ -433,50 +433,126 @@
 
 <!-- Navigation Menu -->
 <!-- Phần menu -->
-<div style="display: flex; justify-content: center;">
-    <div style="position: relative; width: 80%; max-width: 800px; text-align: center; padding: 20px; border-radius: 8px; color: white; font-family: Arial, sans-serif; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);">
-        <!-- Background Image -->
-        <div style="
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #007BFF, #20C997);
-            opacity: 0.8; 
-            z-index: -1;
-            border-radius: 8px;">
-        </div>
+<div style="display: flex; justify-content: center; padding: 20px;">
+    <div style="
+        position: relative; 
+        width: 100%; 
+        max-width: 800px; 
+        padding: 30px 40px; 
+        border-radius: 12px; 
+        color: #333333; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: #D6EAF8;"> <!-- Màu xanh nhạt Apple-style -->
 
         <!-- Main Content -->
-        <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;">
-            <div style="margin-right: 15px;">
-                <img src="image/logo.png" alt="Logo" style="width: 90px;">
+        <div style="
+            position: relative; 
+            z-index: 1; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;">
+            
+            <div style="margin-bottom: 10px;">
+                <img src="image/logo.png" alt="Logo" style="width: 90px; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));"> <!-- Logo với bóng mờ nhẹ -->
             </div>
-            <div style="text-align: left;">
-                <div style="font-size: 1.2em; font-weight: bold; text-align: center;">
-                BỘ CÔNG AN
-                </div>
-                <div style="font-size: 1.2em; font-weight: bold; text-align: center;">
-              TRƯỜNG CAO ĐẲNG CẢNH SÁT NHÂN DÂN I
-                </div>
-               <div style="font-size: 1.8em; font-weight: bold; text-align: center;">
-                    HỘI THẢO KHOA HỌC CẤP TRƯỜNG
-                </div>
-                <div style="font-size: 1.2em; font-style: italic; margin-top: 5px;">
-                    Chủ đề: "Ứng dụng trí tuệ nhân tạo vào dạy và học ngoại ngữ hiện nay"
-                </div>
+            
+            <div style="font-size: 1.4em; font-weight: 600; margin-bottom: 8px; line-height: 1.2; color: #1D1D1F;">
+                HỘI THẢO KHOA HỌC CẤP TRƯỜNG
+            </div>
+            <div style="font-size: 1.2em; opacity: 0.9; color: #6E6E73;">
+                Chủ đề: "Ứng dụng trí tuệ nhân tạo vào dạy và học ngoại ngữ hiện nay"
             </div>
         </div>
     </div>
 </div>
+
+
+
+
 <!-- Introduction Section -->
 <div class="introduction" style="text-align: center;">
-    <h4>GIỚI THIỆU</h4>
+    <h3>GIỚI THIỆU</h3>
     <p>
 Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong lĩnh vực giáo dục, đặc biệt là trong việc dạy và học ngoại ngữ. Nhờ vào AI, người học có thể tận dụng các công cụ học tập cá nhân hóa, nhận diện và sửa lỗi tự động, cũng như cải thiện khả năng phát âm một cách hiệu quả. Đến với Hội thảo là các chuyên gia hàng đầu trong ngành và ngoài ngành Công an sẽ chia sẻ những tiến bộ mới nhất, những ứng dụng của AI trong việc nâng cao chất lượng dạy và học ngoại ngữ.
     </p>
 </div>
+
+
+<!-- Slideshow Section -->
+<div style="display: flex; justify-content: center; padding: 20px;">
+    <div style="
+        position: relative; 
+        width: 100%; 
+        max-width: 800px; 
+        overflow: hidden; 
+        border-radius: 12px;
+        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);">
+        
+        <!-- Slideshow Images -->
+        <div class="slideshow-container">
+            <img src="image/1.png" alt="Slide 1" class="slide fade" style="width: 100%; border-radius: 12px;">
+            <img src="image/2.png" alt="Slide 2" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
+            <img src="image/3.png" alt="Slide 3" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
+            <img src="image/4.png" alt="Slide 3" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
+            <img src="image/5.png" alt="Slide 3" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Slideshow -->
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = 'none';
+            slide.classList.remove('fade-in');
+            if (i === index) {
+                slide.style.display = 'block';
+                slide.classList.add('fade-in');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 3000); // Change slide every 3 seconds
+</script>
+
+<!-- CSS for Fade Effect and Responsiveness -->
+<style>
+    /* Fade effect */
+    .fade {
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out; /* Smooth fade-in effect */
+    }
+
+    .fade-in {
+        opacity: 1;
+    }
+
+    /* Responsive Slideshow */
+    .slideshow-container {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Adjust slideshow height for smaller screens */
+    @media (max-width: 600px) {
+        .slideshow-container {
+            height: 220px; /* Adjust as necessary */
+        }
+    }
+</style>
+
+
+
 
 <div class="benefits-container">
     <h2>LỢI ÍCH CỦA AI TRONG DẠY VÀ HỌC NGOẠI NGỮ</h2>
@@ -533,89 +609,184 @@ Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong l
 </div>
 
 <!-- Speaker Section -->
-<div class="container">
+<style>
+    /* Apple-style minimalist design */
+    * {
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        background-color: #f9f9f9;
+        padding: 20px;
+    }
+
+    .speaker-card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 300px;
+        text-align: center;
+        padding: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .speaker-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .speaker-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+
+    .speaker-card h3 {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 10px;
+    }
+
+    .quote {
+        font-style: italic;
+        color: #555555;
+        font-size: 0.9em;
+        line-height: 1.4em;
+        margin-bottom: 15px;
+    }
+
+    .speaker-description {
+        font-size: 0.85em;
+        color: #777777;
+        line-height: 1.6em;
+    }
+</style>
+
+<div class="container">
     <div class="speaker-card">
-        <img src="image/male.png" alt="Speaker 1">
-        <h3>Nguyễn Văn A</h3>
-        <div class="quote-box">
-            <p>"AI sẽ làm thay đổi cách chúng ta học và dạy ngoại ngữ."</p>
-        </div>
-        <div class="speaker-name">Nguyễn Văn A</div>
-        <div class="speaker-description">Chuyên gia AI tại Đại học B</div>
+        <img src="image/tk.jpg" alt="Speaker 1">
+        <h3>TS. Hoàng Thị Hương Trà</h3>
+        <p class="quote">"Trí tuệ nhân tạo sẽ làm thay đổi cách chúng ta học và dạy ngoại ngữ."</p>
+        <div class="speaker-description">TS.Hoàng Thị Hương Trà - Trưởng Khoa CB4-T09</div>
     </div>
     <div class="speaker-card">
-        <img src="image/male.png" alt="Speaker 2">
-        <h3>Trần Thị B</h3>
-        <div class="quote-box">
-            <p>"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
-        </div>
-        <div class="speaker-name">Trần Thị B</div>
-        <div class="speaker-description">Giáo viên tiếng Anh tại C</div>
+        <img src="image/duc.jpg" alt="Speaker 2">
+        <h3>Ông Nguyễn Anh Đức</h3>
+        <p class="quote">"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
+        <div class="speaker-description">Ông Nguyễn Anh Đức - Chủ tịch HĐQT Smartcom English, chuyên gia giảng dạy IELTS</div>
     </div>
     <div class="speaker-card">
-        <img src="image/male.png" alt="Speaker 2">
-        <h3>Trần Thị B</h3>
-        <div class="quote-box">
-            <p>"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
-        </div>
-        <div class="speaker-name">Trần Thị B</div>
-        <div class="speaker-description">Giáo viên tiếng Anh tại C</div>
+        <img src="image/dhnn.png" alt="Speaker 3">
+        <h3>Đại biểu ĐHNN, QĐQGHN</h3>
+        <p class="quote">"Một số trao đổi về vấn đề kiểm tra đánh giá học viên khi trí tuệ nhân tạo ra đời"</p>
+        <div class="speaker-description">ThS. Khoa Anh Việt, Trường ĐHNN, ĐHQGHN</div>
     </div>
-        <div class="speaker-card">
-        <img src="image/male.png" alt="Speaker 2">
-        <h3>Trần Thị B</h3>
-        <div class="quote-box">
-            <p>"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
-        </div>
-        <div class="speaker-name">Trần Thị B</div>
-        <div class="speaker-description">Giáo viên tiếng Anh tại C</div>
+    <div class="speaker-card">
+        <img src="image/logo.png" alt="Speaker 4">
+        <h3>Đại biểu Trung tâm T1-T09</h3>
+        <p class="quote">"Một số phương pháp dạy nhằm phát huy hiệu quả ứng dụng trí tuệ nhân tạo trong giảng dạy Tiếng Anh"</p>
+        <div class="speaker-description">Nguyễn Thị Bích Hồng - Phó Giám đốc T1-T09</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/t06.jpg" alt="Speaker 5">
+        <h3>Đại biểu Trường Đại học PCCC</h3>
+        <p class="quote">"Ứng dụng trí tuệ nhân tạo trong giảng dạy kỹ năng viết tiếng Anh cho học viên tại trường đại học Phòng cháy chữa cháy"</p>
+        <div class="speaker-description">Trung tá, TS. Nguyễn Bích Ngọc - T06</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/hanoi.png" alt="Speaker 6">
+        <h3>Đại biểu Đại học Hà Nội</h3>
+        <p class="quote">"Tác động của Trí tuệ nhân tạo đến dạy và học Ngoại ngữ: tập trung vào tiếng Anh"</p>
+        <div class="speaker-description">TS. Đặng Thị Lan - Khoa Ngoại ngữ - ĐHHN</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/haucan.png" alt="Speaker 7">
+        <h3>Đại biểu Đại học Kỹ thuật Hậu Cần CAND</h3>
+        <p class="quote">"Trí tuệ nhân tạo và tương lai của dạy học Ngoại ngữ - Xu hướng và công nghệ"</p>
+        <div class="speaker-description">Trung tá Trần Thị Thu Nga, Phó Trưởng khoa, T07</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/t02.png" alt="Speaker 8">
+        <h3>Đại biểu Học viện Cảnh sát nhân dân</h3>
+        <p class="quote">"Thuận lợi và thách thức khi ứng dụng AI vào dạy học Ngoại ngữ hiện nay"</p>
+        <div class="speaker-description">Thiếu tá, Ths. Hồ Thị Xuân Thanh - T02</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/logo.png" alt="Speaker 9">
+        <h3>Đại diện Tổ Tư vấn KHCN-T09</h3>
+        <p class="quote">"Ứng dụng AI trong phân tích kết quả học tập môn tiếng Anh: Cơ hội và thách thức"</p>
+        <div class="speaker-description">Đại úy, ThS Vũ Mạnh Tùng - P4,T09</div>
+    </div>
+    <div class="speaker-card">
+        <img src="image/cand.png" alt="Speaker 10">
+        <h3>Các ý kiến phát biểu khác</h3>
+        <p class="quote">"Các bài viết trao đổi, chia sẻ kinh nghiệm về Trí tuệ nhân tạo..."</p>
+        <div class="speaker-description">Lãnh đạo các đơn vị, T09</div>
     </div>
 </div>
 
 <!-- Schedule Section -->
-<!-- Program Schedule Section -->
 <div class="program-schedule" id="schedule">
+    <div class="schedule-container" style="font-family: Arial, sans-serif; background-color: #f0f2f5; padding: 30px;">
+        <div style="width: 100%; max-width: 650px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); padding: 30px; margin: auto;">
+            <h2 style="text-align: center; font-size: 26px; margin-bottom: 25px; color: #2b2b2b; font-weight: 700;">Chương trình Hội thảo</h2>
 
-    <div class="schedule-container">
-<div style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
-    <div style="width: 100%; max-width: 600px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; margin: auto;">
-        <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px; color: #333;">Chương Trình Hội Thảo</h2>
+            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">📚</div>
+                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">12:30</div>
+                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Đón tiếp đại biểu và khai mạc hội thảo</div>
+            </div>
 
-        <div style="display: flex; align-items: center; margin-bottom: 20px;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">📚</div>
-            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">12:00</div>
-            <div style="color: #555; font-size: 14px;">Đón tiếp đại biểu và khai mạc hội thảo</div>
-        </div>
+            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">🎤</div>
+                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">13:00</div>
+                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Phát biểu khai mạc và giới thiệu chương trình</div>
+            </div>
 
-        <div style="display: flex; align-items: center; margin-bottom: 20px;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">🎤</div>
-            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">13:00</div>
-            <div style="color: #555; font-size: 14px;">Phát biểu khai mạc và giới thiệu chương trình</div>
-        </div>
+            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">💼</div>
+                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">13:30</div>
+                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Tham luận: Ứng dụng AI trong dạy và học ngoại ngữ</div>
+            </div>
 
-        <div style="display: flex; align-items: center; margin-bottom: 20px;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">💼</div>
-            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">15:00</div>
-            <div style="color: #555; font-size: 14px;">Tham luận: Ứng dụng AI trong dạy và học ngoại ngữ</div>
-        </div>
+            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">🏆</div>
+                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">15:30</div>
+                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Tổng kết hội thảo</div>
+            </div>
 
-        <div style="display: flex; align-items: center; margin-bottom: 20px;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">🏆</div>
-            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">18:00</div>
-            <div style="color: #555; font-size: 14px;">Trao giải thưởng và tổng kết hội thảo</div>
-        </div>
-
-        <div style="display: flex; align-items: center;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #4CAF50; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 20px; margin-right: 15px; flex-shrink: 0;">🍽️</div>
-            <div style="font-weight: bold; color: #333; font-size: 14px; margin-right: 10px; width: 50px; text-align: right;">20:00</div>
-            <div style="color: #555; font-size: 14px;">Tiệc tối và giao lưu</div>
+            <div class="event-item" style="display: flex; align-items: center; transition: transform 0.2s, box-shadow 0.2s;">
+                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">🍽️</div>
+                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">16:00</div>
+                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Chụp ảnh, tiệc trà</div>
+            </div>
         </div>
     </div>
 </div>
 
-    </div>
-</div>
+<style>
+    /* Icon Hover Animation */
+    .event-item:hover .icon {
+        transform: scale(1.1);
+    }
+
+    /* Event Item Hover Effect */
+    .event-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+</style>
+
 
 <!-- bai viet-->
 <div style="max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
@@ -765,7 +936,7 @@ Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong l
 
 
 <footer>
-    <p>© 2024 Hội Thảo Ứng Dụng AI- Khoa Ngoại ngữ - Tin học, Trường Cao đẳng CSND I.</p>
+    <p>© Create by: Khoa Ngoại ngữ - Tin học, Trường Cao đẳng CSND I.</p>
 </footer>
 
 <script>
