@@ -427,9 +427,68 @@
         transform: scale(1.1);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
+
+ #fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 1000;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+  }
+  
+  .firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    animation: explode 1s ease-in-out;
+  }
+  
+  @keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+
+  #welcome-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
     </style>
 </head>
 <body>
+    <!-- Pháo hoa-->
+<div id="fireworks">
+  <div id="welcome-text">CHÀO MỪNG Đ/C ĐẾN VỚI HỘI THẢO KHOA HỌC CẤP TRƯỜNG!</div>
+  <!-- Pháo hoa nhiều màu sắc -->
+  <div class="firework" style="top: 50%; left: 50%; background: red;"></div>
+  <div class="firework" style="top: 30%; left: 40%; background: blue;"></div>
+  <div class="firework" style="top: 60%; left: 70%; background: green;"></div>
+  <div class="firework" style="top: 40%; left: 80%; background: yellow;"></div>
+  <div class="firework" style="top: 70%; left: 30%; background: purple;"></div>
+  <div class="firework" style="top: 20%; left: 60%; background: orange;"></div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const fireworks = document.getElementById("fireworks");
+    fireworks.style.display = "block";
+
+    setTimeout(() => {
+      fireworks.style.display = "none";
+    }, 2000); // Hiển thị trong 2 giây
+  });
+</script>
+
 
 <!-- Navigation Menu -->
 <!-- Phần menu -->
@@ -523,6 +582,10 @@ Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong l
     }
 
     setInterval(nextSlide, 3000); // Change slide every 3 seconds
+
+
+
+
 </script>
 
 <!-- CSS for Fade Effect and Responsiveness -->
@@ -604,7 +667,7 @@ Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong l
 
     <!-- Call to Action -->
     <div class="cta-button">
-        <a href="#">LET'S GO</a>
+        <a href="#">CÁC Ý KIẾN THAM GIA PHÁT BIỂU TẠI HỘI THẢO</a>
     </div>
 </div>
 
@@ -756,7 +819,7 @@ Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong l
             <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
                 <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">💼</div>
                 <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">13:30</div>
-                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Tham luận: Ứng dụng AI trong dạy và học ngoại ngữ</div>
+                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Thảo luận về chủ đề: Ứng dụng AI trong dạy và học ngoại ngữ</div>
             </div>
 
             <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
@@ -785,110 +848,333 @@ Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong l
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
+
+    .row {
+        display: flex;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+        transition: background-color 0.3s ease;
+    }
+    .row:nth-child(odd) {
+        background-color: #ffffff;
+    }
+    .row:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .row:hover {
+        background-color: #e6f7ff; /* Màu nền sáng hơn khi hover */
+    }
+    .column {
+        color: #3c3c43;
+    }
+    .column.author {
+        flex: 1;
+        font-weight: 500;
+    }
+    .column.article {
+        flex: 2;
+    }
+
 </style>
 
 
-<!-- bai viet-->
-<div style="max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
-    <h2 style="text-align: center; color: #333; font-size: 24px; font-weight: bold; margin-bottom: 20px;">CÁC BÀI VIẾT ĐĂNG KÝ YẾU HỘI THẢO</h2>
+<!-- bai viet -->
+<div style="max-width: 800px; margin: 40px auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #1d1d1f; background-color: #f9f9f9; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 24px;">
+    <h2 style="text-align: center; color: #1d1d1f; font-size: 24px; font-weight: 600; margin-bottom: 24px;">CÁC BÀI VIẾT ĐĂNG KÝ YẾU HỘI THẢO</h2>
     
     <!-- Tab Navigation -->
-    <div class="tab-container">
-        <button class="tab-link active" onclick="openTab(event, 'tab1')">Chủ đề 1</button>
-        <button class="tab-link" onclick="openTab(event, 'tab2')">Chủ đề 2</button>
-        <button class="tab-link" onclick="openTab(event, 'tab3')">Chủ đề 3</button>
-        <button class="tab-link" onclick="openTab(event, 'tab4')">Chủ đề 4</button>
+ <div class="tab-container" style="display: flex; justify-content: center; margin-bottom: 24px;">
+        <button class="tab-link active" onclick="openTab(event, 'tab1')" style="padding: 8px 16px; border: none; background-color: #007aff; color: white; border-radius: 8px; font-weight: 500; margin-right: 8px; cursor: pointer;">Bài viết 1-9</button>
+        <button class="tab-link" onclick="openTab(event, 'tab2')" style="padding: 8px 16px; border: none; background-color: #f0f0f5; color: #007aff; border-radius: 8px; font-weight: 500; margin-right: 8px; cursor: pointer;">Bài viết 10-19</button>
+        <button class="tab-link" onclick="openTab(event, 'tab3')" style="padding: 8px 16px; border: none; background-color: #f0f0f5; color: #007aff; border-radius: 8px; font-weight: 500; margin-right: 8px; cursor: pointer;">Bài viết 20-37</button>
     </div>
 
     <!-- Tab Content -->
     <div id="tab1" class="tab-content" style="display: block;">
-        <div class="row">
-            <div class="column author">Tác giả 1</div>
-            <div class="column article">Bài viết về chủ đề 1</div>
-        </div>
-        <div class="row">
-            <div class="column author">Tác giả 2</div>
-            <div class="column article">Bài viết về chủ đề 1</div>
-        </div>
-        <!-- Repeat for more articles -->
-    </div>
-
-    <div id="tab2" class="tab-content">
-        <div class="row">
-            <div class="column author">Tác giả 1</div>
-            <div class="column article">Bài viết về chủ đề 2</div>
-        </div>
-        <div class="row">
-            <div class="column author">Tác giả 2</div>
-            <div class="column article">Bài viết về chủ đề 2</div>
-        </div>
-        <!-- Repeat for more articles -->
-    </div>
-
-    <div id="tab3" class="tab-content">
-        <div class="row">
-            <div class="column author">Tác giả 1</div>
-            <div class="column article">Bài viết về chủ đề 3</div>
-        </div>
-        <div class="row">
-            <div class="column author">Tác giả 2</div>
-            <div class="column article">Bài viết về chủ đề 3</div>
-        </div>
-        <!-- Repeat for more articles -->
-    </div>
-
-    <div id="tab4" class="tab-content">
-        <div class="row">
-            <div class="column author">Tác giả 1</div>
-            <div class="column article">Bài viết về chủ đề 4</div>
-        </div>
-        <div class="row">
-            <div class="column author">Tác giả 2</div>
-            <div class="column article">Bài viết về chủ đề 4</div>
-        </div>
-        <!-- Repeat for more articles -->
-    </div>
+<div class="row">
+    <div class="column author">Thiếu tướng, PGS.TS Lê Hoài Nam - Hiệu trưởng Trường Cao đẳng CSND I</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo trong giáo dục và những vấn đề đặt ra đối với công tác giáo dục, đào tạo của trường Cao đẳng Cảnh sát nhân dân I</div>
 </div>
+<div class="row">
+    <div class="column author">Đại tá, TS Đàm Văn Thuỷ - Phó Hiệu trưởng Trường Cao đẳng CSND I</div>
+    <div class="column article">Ứng dụng công nghệ số trong dạy và học ngoại ngữ tại Trường Cao đẳng Cảnh sát nhân dân I</div>
+</div>
+
+<div class="row">
+    <div class="column author">Nguyễn Anh Đức - Chủ tịch HĐQT Smartcom English</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo vào giảng dạy Ielts những vấn đề thực tiễn và bài học kinh nghiệm</div>
+</div>
+<div class="row">
+    <div class="column author">ThS. Khoa Anh Việt - Trường ĐH Ngoại ngữ - ĐH QGHN</div>
+    <div class="column article">Một số trao đổi về vấn đề kiểm tra đánh giá học viên khi trí tuệ nhân tạo (AI) ra đời</div>
+</div>
+<div class="row">
+    <div class="column author">Thượng tá, TS Hoàng Thị Hương Trà - Trưởng Khoa CB4 - T09</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo trong giảng dạy tiếng Anh xu hướng tất yếu trong bối cảnh chuyển đổi số giáo dục hiện nay</div>
+</div>
+<div class="row">
+    <div class="column author">Thượng tá, TS Nguyễn Thị Minh Trang - Phó Trưởng Khoa Ngoại ngữ - T02</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy học ngoại ngữ tại các trường Công an nhân dân: Thực trạng và một số đề xuất.</div>
+</div>
+<div class="row">
+    <div class="column author">Trung tá, TS Nguyễn Bích Ngọc - Phó Trưởng Khoa Khoa học cơ bản và ngoại ngữ - T06</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy kỹ năng viết tiếng Anh tại trường Đại học Phòng cháy chữa cháy</div>
+</div>
+<div class="row">
+    <div class="column author">Trung tá Trần Thị Thu Nga - Phó Trưởng Khoa Khoa học cơ bản và ngoại ngữ - T07</div>
+    <div class="column article">AI và tương lai của dạy học ngoại ngữ - xu hướng và công nghệ</div>
+</div>
+<div class="row">
+    <div class="column author">Thiếu tá, ThS Hồ Thị Xuân Thanh - Viện Khoa học Cảnh sát – T02</div>
+    <div class="column article">Thuận lợi và thách thức khi ứng dụng trí tuệ nhân tạo vào dạy và học ngoại ngữ hiện nay</div>
+</div>
+    </div>
+
+   <div id="tab2" class="tab-content" style="display: none;">
+<div class="row">
+    <div class="column author">Đại úy Ngô Minh Tú-Khoa Khoa học cơ bản và ngoại ngữ - T06</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy học kết hợp môn tiếng Anh
+tại trường Đại học Phòng cháy chữa cháy.</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">Đặng Thị Lan - Khoa Sau đại học - Trường Đại học Hà Nội</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy học kết hợp môn tiếng Anh
+tại trường Đại học Phòng cháy chữa cháy.</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">ThS. Vũ Quỳnh Nga- Khoa Ngoại ngữ - Học viện Tài chính</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo để giúp sinh viên tự luyện tập kỹ năng
+nói tiếng Anh tại Học viện Tài chính</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">ThS. Nguyễn Thị Hồng Mến - Bộ môn Ngoại ngữ – Khoa Cơ bản Học viện Chính sách và Phát triển</div>
+    <div class="column article">Phát huy vài trò của ChatGPT trong giảng dạy tiếng Anh giao tiếp</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">Thượng tá, ThS Bùi Khắc Hải - Phó Trưởng khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Ứng dụng AI trong việc cá nhân hoá học tập ngoại ngữ tại Trường Cao đẳng Cảnh sát nhân dân I: Lợi ích và thực tiễn</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">Trung tá, ThS Phùng Thị Thu - Phó Trưởng khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Ưu điểm và nhược điểm của trí tuệ nhân tạo trong dạy và học ngoại ngữ hiện nay</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">Trung tá, ThS Hoàng Hương Giang- Phó Trưởng khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Sử dụng trí tuệ nhân tạo hỗ trợ quá trình dạy học ngoại ngữ - xu hướng giáo dục mới</div>
+</div>
+
+<div class="row">
+    <div class="column author">Thượng tá, TS Bùi Bảo Kiếm- Phó Trưởng phòng Chính trị - T09</div>
+    <div class="column article">AI trong dạy và học: Công cụ tương tác hiện đại cho học viên Trường Cao đẳng Cảnh sát nhân dân I</div>
+</div>
+
+<div class="row">
+    <div class="column author">Thượng tá, ThS Hoàng Sỹ Thành- Phó Trưởng Khoa Nghiệp vụ cơ bản - T09</div>
+    <div class="column article">AI và vai trò của nhà giáo trong thời đại giáo dục 4.0</div>
+</div>
+</div>
+
+
+    <div id="tab3" class="tab-content" style="display: none;">
+<div class="row">
+    <div class="column author">Thượng tá, ThS Nguyễn Thị Quỳnh Trang- Phó Giám đốc Trung tâm T1-T09</div>
+    <div class="column article">Sử dụng các ứng dụng AI nhằm tối ưu hoá việc tự học tiếng Anh</div>
+</div>
+</div>
+
+<div class="row">
+    <div class="column author">Thiếu tá Nguyễn Tài Thọ; Đại úy Bùi Thanh Lam- Phòng Quản lý đào tạo - T09</div>
+    <div class="column article">Ứng dụng công nghệ trí tuệ nhân tạo (AI) trong dạy học tích hợp
+nội dung và ngôn ngữ môn tiếng Anh tại Trường Cao đẳng Cảnh sát nhân dân I</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">Đại úy, ThS Vũ Mạnh Tùng- Phòng Khảo thí & đảm bảo chất lượng đào tạo - T09</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo trong phân tích kết quả học tập môn
+tiếng Anh: Cơ hội và thách thức</div>
+</div>
+
+<div class="row">
+    <div class="column author">Trung tá, ThS Khổng Thị Thu Hằng - Khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Ứng dụng ChatGPT để cải thiện kỹ năng giao tiếp tiếng Anh cho
+học viên Trường Cao đẳng Cảnh sát nhân dân I</div>
+</div>
+
+<div class="row">
+    <div class="column author">Trung tá, ThS Nguyễn Sỹ Minh - Khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Ứng dụng trí tuệ nhân tạo (AI) trong dạy học ngoại ngữ tại các
+trường công an: Cơ hội và thách thức</div>
+</div>
+
+
+<div class="row">
+    <div class="column author">Thiếu tá, Ths Nguyễn Thị Thu Trang - Khoa CB4  và Thiếu tá, ThsVũ Thị Ngọc Thúy
+Khoa Luật - T09</div>
+    <div class="column article">Ứng dụng AI để nâng cao kỹ năng nói tiếng Anh cho học viên
+Trường Cao đẳng Cảnh sát nhân dân I</div>
+</div>
+
+<div class="row">
+    <div class="column author">Thiếu tá, ThS Hoàng Thị Dịu Huyền - Khoa Ngoại ngữ- Tin học - T09</div>
+    <div class="column article">Ứng dụng Chatbots hỗ trợ việc dạy và học tiếng Anh tại Trường
+Cao đẳng Cảnh sát nhân dân I</div>
+</div>
+
+<div class="row">
+    <div class="column author">Trung tá, ThS Nguyễn Thị Hoàng Yến-Khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Ứng dụng công cụ trí tuệ nhân tạo trong giảng dạy nhằm nâng cao chất lượng đào tạo tại Khoa Ngoại ngữ - Tin học</div>
+</div>
+
+<div class="row">
+    <div class="column author">Thiếu tá, ThS Nguyễn Thị Thu Hằng - Khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Sử dụng AI tối ưu thời gian giảng dạy cho giáo viên tiếng Anh, góp phần nâng cao chất lượng giáo dục đào tạo tại Trường Cao đẳng CSND I</div>
+</div>
+
+<div class="row">
+    <div class="column author">Thiếu tá, ThS Vũ Thị Thêu - Khoa Ngoại ngữ - Tin học - T09</div>
+    <div class="column article">Một số ứng dụng AI trong hỗ trợ học tiếng Anh</div>
+</div>
+
+
+    <div class="row">
+         <div class="column author">Thiếu tá, ThS Nguyễn Thanh Thuý - Khoa Ngoại ngữ - Tin học - T09</div>
+         <div class="column article">Ứng dụng phần mềm Canva AI vào việc tạo hình ảnh, video
+trong thiết kế bài giảng điện tử môn tiếng Anh của Khoa Ngoại ngữ - Tin học</div>
+    </div>
+
+
+    <div class="row">
+         <div class="column author">Thiếu tá, ThS Hoàng Thị Ngọc Mai - Khoa Ngoại ngữ - Tin học - T09</div>
+         <div class="column article">Quản lý trí tuệ nhân tạo (AI) kinh nghiệm thế giới và khuyến nghị cho Việt Nam</div>
+    </div>
+
+    <div class="row">
+         <div class="column author">Thiếu tá, ThS Doãn Thị Hương - Khoa Ngoại ngữ - Tin học - T09</div>
+         <div class="column article">Ứng dụng công nghệ AI trong thiết kế bài giảng điện tử</div>
+    </div>
+
+
+    <div class="row">
+         <div class="column author">Thiếu tá, ThS Lê Thị Thuỷ - Khoa Ngoại ngữ - Tin học - T09</div>
+         <div class="column article">Ứng dụng AI để nâng cao kỹ năng viết tiếng Anh cho học viên Trường Cao đẳng Cảnh sát nhân dân I</div>
+    </div>
+
+
+    <div class="row">
+         <div class="column author">Thiếu tá Nguyễn Đình Hoàng - Khoa Ngoại ngữ-Tin học - T09</div>
+         <div class="column article">Công nghệ AI hỗ trợ vai trò của giáo viên trong quá trình giáo dục</div>
+    </div>
+
+    <div class="row">
+         <div class="column author">Thiếu tá, ThS Nguyễn Thị Thuỷ- Khoa Ngoại ngữ - Tin học – T09</div>
+         <div class="column article">Một số gợi ý về ứng dụng trí tuệ nhân tạo trong dạy tiếng Anh
+tại trường Cao đẳng Cảnh sát nhân dân I</div>
+    </div>
+
+    <div class="row">
+         <div class="column author">Cử nhân Phạm Hiền Linh - Cao học QH2022D2, ĐHNN- ĐHQuốc gia Hà Nội</div>
+         <div class="column article">Kinh nghiệm sử dụng các Prompts trong ChatGPT góp phần nâng cao hiệu quả trong công tác dạy và học tiếng Anh hiện nay</div>
+    </div>
+
+</div>
+
+<style>
+    /* Style for tab buttons */
+    .tab-link {
+        padding: 8px 16px;
+        border: none;
+        background-color: #f0f0f5;
+        color: #007aff;
+        border-radius: 8px;
+        font-weight: 500;
+        margin-right: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .tab-link.active {
+        background-color: #007aff;
+        color: white;
+    }
+    .tab-link:hover {
+        background-color: #d0eaff;
+    }
+</style>
+
+<script>
+function openTab(evt, tabName) {
+    // Hide all tab content elements
+    const tabContent = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+    }
+
+    // Remove "active" class from all tab links
+    const tabLinks = document.getElementsByClassName("tab-link");
+    for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove("active");
+        tabLinks[i].style.backgroundColor = "#f0f0f5";
+        tabLinks[i].style.color = "#007aff";
+    }
+
+    // Show the selected tab and apply "active" class to the clicked tab link
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.classList.add("active");
+}
+</script>
+
 
 <style>
     .tab-container {
         display: flex;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
 
     .tab-link {
-        background-color: #f1f1f1;
-        border: none;
+        background-color: #f5f5f7;
+        border: 1px solid transparent;
         padding: 10px 20px;
         font-size: 16px;
         cursor: pointer;
-        transition: background-color 0.3s;
-        border-radius: 8px 8px 0 0;
+        transition: background-color 0.3s, border-color 0.3s;
+        border-radius: 8px;
         margin-right: 5px;
     }
 
     .tab-link:hover {
-        background-color: #ddd;
+        background-color: #e0e0e5;
     }
 
     .tab-link.active {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
+        background-color: #007aff;
+        color: #fff;
+        font-weight: 500;
     }
 
     .tab-content {
         display: none;
         padding: 20px;
         background-color: #ffffff;
-        border-radius: 0 0 8px 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .row {
         display: flex;
-        padding: 8px 0;
+        padding: 12px 0;
         border-bottom: 1px solid #e0e0e0;
     }
 
@@ -899,18 +1185,39 @@ Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong l
 
     .author {
         width: 30%;
-        color: #007bff;
-        font-weight: bold;
+        color: #007aff;
+        font-weight: 500;
     }
 
     .article {
         width: 70%;
+        color: #1d1d1f;
     }
 
     .tab-content .row:last-child {
         border-bottom: none;
     }
 </style>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
 
 <script>
     function openTab(evt, tabId) {
