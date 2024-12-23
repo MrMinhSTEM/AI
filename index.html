@@ -1,1305 +1,391 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng AI Trong Học Ngoại Ngữ</title>
+    <title>Sáng kiến: Xây dựng phần mềm quản lý công tác số hóa</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            color: #444444;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
             line-height: 1.6;
-            background-color: #F9F9F9;
+            font-smooth: antialiased;
         }
 
-        /* Navigation Menu */
-        .navbar {
-            display: flex;
-            justify-content: center;
-            background-color: #4A90E2; /* Bright blue color */
-            padding: 15px;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .navbar a:hover {
-            background-color: #357ABD; /* Darker blue on hover */
-            border-radius: 5px;
-        }
-
-        /* Slideshow Banner */
-        .slideshow-container {
-            position: relative;
-            max-width: 100%; /* Max width to fit mobile devices */
-            margin: auto;
-            overflow: hidden;
-        }
-
-        .slide {
-            display: none; /* Hide all slides */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-        }
-
-        .active {
-            display: block; /* Show the active slide */
-        }
-
-        .slideshow-image {
-            width: 100%; /* Ensure image takes 100% width of container */
-            height: auto;
-        }
-
-        /* Navigation dots */
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s;
-            cursor: pointer;
-        }
-
-        .active-dot {
-            background-color: #4A90E2; /* Color for active dot */
-        }
-
-        /* Introduction Section */
-        .introduction {
-            padding: 20px;
-            text-align: center;
-            background-color: #FFFFFF;
-        }
-
-        .introduction h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-            color: #4A90E2;
-        }
-
-        .introduction p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #444444;
-        }
-
-        /* Benefits Section */
-        .benefits {
-            padding: 20px;
-            background-color: #F3F4F6; /* Light gray */
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            color: #fff;
             text-align: center;
         }
 
-        .benefits h2 {
-            font-size: 2em;
+        #welcome-screen h1 {
             margin-bottom: 20px;
-            color: #4A90E2;
+            font-size: 2.5rem;
         }
 
-        .benefit-list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .benefit-item {
-            width: 300px;
-            background-color: #FFFFFF;
-            padding: 15px;
+        #welcome-screen input {
+            margin-top: 10px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            border: 1px solid #E1DFDD;
         }
 
-        .benefit-item h3 {
-            margin-bottom: 10px;
-            color: #4A90E2;
-        }
-
-        .benefit-item p {
-            font-size: 0.95em;
-            color: #666666;
-        }
-
-        /* Speaker Section */
-        .container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .speaker-card {
-            background-color: #FFFFFF;
-            border: 1px solid #E1DFDD;
+        #welcome-screen button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
             border-radius: 8px;
-            width: 300px;
-            padding: 20px;
+            background: #0071e3;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #welcome-screen button:hover {
+            background: #005bb5;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
+        }
+
+        header {
+            background: linear-gradient(to bottom, #f5f5f7, #e5e5ea);
+            color: #1d1d1f;
             text-align: center;
+            padding: 80px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             position: relative;
             overflow: hidden;
+        }
+
+        header img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0));
+            z-index: -1;
+            animation: pulse 6s infinite;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section .title {
+            display: inline-block;
+            background: linear-gradient(to right, #0071e3, #005bb5);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .section .title:hover {
+            background: linear-gradient(to right, #005bb5, #003f99);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
+        }
+
+        .author-cards {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+        }
+
+        .author-card {
+            background: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            text-align: center;
+            padding: 20px;
             transition: transform 0.3s;
         }
 
-        .speaker-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .author-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .speaker-card img {
-            width: 120px;
-            height: 120px;
+        .author-card img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .author-card img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
+        }
+
+        .author-card h3 {
+            font-size: 1.4rem;
+            color: #0071e3;
             margin-bottom: 10px;
         }
 
-        .quote-box {
-            background-color: #4A90E2; /* Bright blue color */
-            padding: 10px 15px;
-            border-radius: 8px;
-            color: white;
-            font-size: 0.9em;
-            margin-top: 15px;
-            position: relative;
-            line-height: 1.4;
+        .author-card p {
+            font-size: 1rem;
+            color: #333;
         }
 
-        .quote-box::before, .quote-box::after {
-            content: '“';
-            font-size: 2em;
-            position: absolute;
-            color: white;
-        }
-
-        .quote-box::before {
-            top: -10px;
-            left: -10px;
-        }
-
-        .quote-box::after {
-            content: '”';
-            bottom: -10px;
-            right: -10px;
-        }
-
-        .speaker-name {
-            font-weight: bold;
-            margin-top: 10px;
-            color: #444444;
-        }
-
-        .speaker-description {
-            font-size: 0.85em;
-            color: #666666;
-            margin-top: 5px;
-        }
-
-        /* Schedule Section */
-        .program-schedule {
-            padding: 20px;
+        .slideshow {
             text-align: center;
-            background-color: #FFFFFF;
         }
 
-        .schedule-container {
+        .slideshow img {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 12px;
+        }
+
+        .slideshow img:not(:first-child) {
+            display: none;
+        }
+
+        .video-section {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .schedule-card {
-            background-color: #F3F4F6;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: left;
-            border: 1px solid #E1DFDD;
-        }
-
-        .time {
-            font-weight: bold;
-            color: #4A90E2;
-        }
-
-        .event {
-            color: #666666;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 20px;
-            text-align: center;
-            background-color: #FFFFFF;
-        }
-        /* Program Schedule Section */
-.program-schedule {
-    padding: 40px 20px;
-    background-color: #FFFFFF;
-    text-align: center;
-}
-
-.program-schedule h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #0078D4;
-}
-
-.schedule-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.schedule-card {
-    background-color: #F3F2F1;
-    border-radius: 10px;
-    padding: 20px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.schedule-card:hover {
-    transform: scale(1.05);
-}
-
-.time {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #0078D4;
-}
-
-.event {
-    font-size: 1.1em;
-    margin-top: 5px;
-    color: #333333;
-}
-         /* Định dạng cho thanh menu */
-        .menu {
-            display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            background-color: #004080;
-            color: white;
         }
 
-        /* Định dạng phần logo bên trái */
-        .menu .logo {
-            display: flex;
-            align-items: center;
+        .video-section .text {
+            flex: 1;
+            margin-right: 20px;
         }
 
-        .menu .logo img {
-            height: 50px;
-            margin-right: 10px;
+        .video-section .text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
         }
 
-        /* Định dạng phần văn bản ở giữa */
-        .menu .title {
+        .video-section .image {
+            flex: 1;
             text-align: center;
-            font-weight: bold;
-            font-size: 20px;
         }
 
-        /* Định dạng cho các dòng chữ */
-        .menu .title .line1 {
-            font-size: 22px;
+        .video-section .image img {
+            max-width: 100%;
+            border-radius: 12px;
+            transition: transform 0.3s;
         }
 
-        .menu .title .line2 {
-            font-size: 16px;
-            font-style: italic;
+        .video-section .image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
         }
 
-        /* Footer Section */
         footer {
+            background: #f5f5f7;
+            color: #6e6e73;
+            padding: 20px 0;
             text-align: center;
-            padding: 20px;
-            background-color: #4A90E2;
-            color: white;
+            border-top: 1px solid #e0e0e0;
         }
 
-    .introduction {
-        text-align: center; /* Căn giữa nội dung */
-        margin: 0 auto;    /* Tự động căn lề hai bên */
-        max-width: 800px;  /* Chiều rộng tối đa của nội dung */
-    }
-
-        /* Style chung cho toàn bộ khung */
-        /* Style chung cho toàn bộ khung */
-    .benefits-container {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .benefits-container h2 {
-        text-align: center;
-        color: #333;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 30px;
-    }
-
-    /* Style cho từng mục lợi ích */
-    .benefit-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 25px;
-        padding: 15px;
-        transition: transform 0.3s, box-shadow 0.3s;
-        border-radius: 12px;
-        width: 100%;
-    }
-
-    /* Hiệu ứng sáng và phóng to khi di chuột */
-    .benefit-item:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Style cho ảnh và nội dung */
-    .benefit-item img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        margin-right: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .benefit-item h4 {
-        margin: 0;
-        font-weight: bold;
-        color: #4CAF50;
-        text-align: left; /* Căn trái tiêu đề */
-    }
-
-    .benefit-item p {
-        margin: 5px 0 0;
-        font-size: 15px;
-        color: #666;
-        text-align: left; /* Căn trái mô tả */
-    }
-
-    /* Style cho nút Call to Action */
-    .cta-button {
-        text-align: center;
-        margin-top: 30px;
-    }
-
-    .cta-button a {
-        text-decoration: none;
-        background-color: #1976D2;
-        color: #fff;
-        padding: 12px 24px;
-        border-radius: 25px;
-        font-weight: bold;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .cta-button a:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
- #fireworks {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none;
-    z-index: 1000;
-    color: white;
-    font-size: 2em;
-    text-align: center;
-  }
-  
-  .firework {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: white;
-    border-radius: 50%;
-    animation: explode 1s ease-in-out;
-  }
-  
-  @keyframes explode {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(3); opacity: 0; }
-  }
-
-  #welcome-text {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
+        footer p {
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
-    <!-- Pháo hoa-->
-<div id="fireworks">
-  <div id="welcome-text">CHÀO MỪNG Đ/C ĐẾN VỚI HỘI THẢO KHOA HỌC CẤP TRƯỜNG!</div>
-  <!-- Pháo hoa nhiều màu sắc -->
-  <div class="firework" style="top: 50%; left: 50%; background: red;"></div>
-  <div class="firework" style="top: 30%; left: 40%; background: blue;"></div>
-  <div class="firework" style="top: 60%; left: 70%; background: green;"></div>
-  <div class="firework" style="top: 40%; left: 80%; background: yellow;"></div>
-  <div class="firework" style="top: 70%; left: 30%; background: purple;"></div>
-  <div class="firework" style="top: 20%; left: 60%; background: orange;"></div>
-</div>
+    <div id="welcome-screen">
+        <h1>Chào mừng đến với website</h1>
+        <p>Vui lòng nhập mật khẩu để tiếp tục</p>
+        <input type="password" id="password" placeholder="Nhập mật khẩu">
+        <button onclick="checkPassword()">Đăng nhập</button>
+    </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const fireworks = document.getElementById("fireworks");
-    fireworks.style.display = "block";
+    <header>
+        <img src="image/logo.png" alt="Logo">
+        <h2>Xây dựng phần mềm Quản lý công tác số hóa tại Khoa Ngoại Ngữ - Tin học</h2>
 
-    setTimeout(() => {
-      fireworks.style.display = "none";
-    }, 2000); // Hiển thị trong 2 giây
-  });
-</script>
+    </header>
 
-
-<!-- Navigation Menu -->
-<!-- Phần menu -->
-<div style="display: flex; justify-content: center; padding: 20px;">
-    <div style="
-        position: relative; 
-        width: 100%; 
-        max-width: 800px; 
-        padding: 30px 40px; 
-        border-radius: 12px; 
-        color: #333333; 
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
-        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        background-color: #D6EAF8;"> <!-- Màu xanh nhạt Apple-style -->
-
-        <!-- Main Content -->
-        <div style="
-            position: relative; 
-            z-index: 1; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;">
-            
-            <div style="margin-bottom: 10px;">
-                <img src="image/logo.png" alt="Logo" style="width: 90px; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));"> <!-- Logo với bóng mờ nhẹ -->
+    <main class="content">
+        <div class="author-cards">
+            <div class="author-card">
+                <img src="image/minh.jpg" alt="Tác giả 1">
+                <h3>Tác giả 1</h3>
+                <p>GVCC, ThS. Nguyễn Sỹ Minh</p>
             </div>
-            
-            <div style="font-size: 1.4em; font-weight: 600; margin-bottom: 8px; line-height: 1.2; color: #1D1D1F;">
-                HỘI THẢO KHOA HỌC CẤP TRƯỜNG
-            </div>
-            <div style="font-size: 1.2em; opacity: 0.9; color: #6E6E73;">
-                Chủ đề: "Ứng dụng AI vào dạy và học ngoại ngữ trong giai đoạn hiện nay"
+            <div class="author-card">
+                <img src="image/huong.jpg" alt="Tác giả 2">
+                <h3>Tác giả 2</h3>
+                <p>GVCC, ThS. Doãn Thị Hương</p>
             </div>
         </div>
-    </div>
-</div>
 
-
-
-
-<!-- Introduction Section -->
-<div class="introduction" style="text-align: center;">
-    <h3>GIỚI THIỆU</h3>
-    <p>
-Trí tuệ nhân tạo (AI) đang tạo ra những cơ hội đột phá trong lĩnh vực giáo dục, đặc biệt là trong việc dạy và học ngoại ngữ. Nhờ vào AI, người học có thể tận dụng các công cụ học tập cá nhân hóa, nhận diện và sửa lỗi tự động, cũng như cải thiện khả năng phát âm một cách hiệu quả. Đến với Hội thảo là các chuyên gia hàng đầu trong ngành và ngoài ngành Công an sẽ chia sẻ những tiến bộ mới nhất, những ứng dụng của AI trong việc nâng cao chất lượng dạy và học ngoại ngữ.
-    </p>
-</div>
-
-
-<!-- Slideshow Section -->
-<div style="display: flex; justify-content: center; padding: 20px;">
-    <div style="
-        position: relative; 
-        width: 100%; 
-        max-width: 800px; 
-        overflow: hidden; 
-        border-radius: 12px;
-        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);">
-        
-        <!-- Slideshow Images -->
-        <div class="slideshow-container">
-            <img src="image/1.png" alt="Slide 1" class="slide fade" style="width: 100%; border-radius: 12px;">
-            <img src="image/2.png" alt="Slide 2" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
-            <img src="image/3.png" alt="Slide 3" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
-            <img src="image/4.png" alt="Slide 3" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
-            <img src="image/5.png" alt="Slide 3" class="slide fade" style="width: 100%; border-radius: 12px; display: none;">
-        </div>
-    </div>
-</div>
-
-<!-- JavaScript for Slideshow -->
-<script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.display = 'none';
-            slide.classList.remove('fade-in');
-            if (i === index) {
-                slide.style.display = 'block';
-                slide.classList.add('fade-in');
-            }
-        });
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-
-    setInterval(nextSlide, 3000); // Change slide every 3 seconds
-
-
-
-
-</script>
-
-<!-- CSS for Fade Effect and Responsiveness -->
-<style>
-    /* Fade effect */
-    .fade {
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out; /* Smooth fade-in effect */
-    }
-
-    .fade-in {
-        opacity: 1;
-    }
-
-    /* Responsive Slideshow */
-    .slideshow-container {
-        width: 100%;
-        height: auto;
-    }
-
-    /* Adjust slideshow height for smaller screens */
-    @media (max-width: 600px) {
-        .slideshow-container {
-            height: 220px; /* Adjust as necessary */
-        }
-    }
-</style>
-
-
-
-
-<div class="benefits-container">
-    <h2>LỢI ÍCH CỦA AI TRONG DẠY VÀ HỌC NGOẠI NGỮ</h2>
-
-    <!-- Item 1 -->
-    <div class="benefit-item">
-        <img src="image/canhanhoa.png" alt="Cá nhân hóa quá trình học tập">
-        <div>
-            <h4 style="color: #4CAF50;">Cá nhân hóa quá trình học tập</h4>
-            <p>AI điều chỉnh lộ trình học phù hợp với từng học viên, tăng hiệu quả học tập.</p>
-        </div>
-    </div>
-
-    <!-- Item 2 -->
-    <div class="benefit-item">
-        <img src="image/giaotiep.jpg" alt="Cải thiện kỹ năng phát âm và giao tiếp">
-        <div>
-            <h4 style="color: #2196F3;">Cải thiện kỹ năng phát âm và giao tiếp</h4>
-            <p>Hỗ trợ phát âm chuẩn và nâng cao kỹ năng giao tiếp thực tế.</p>
-        </div>
-    </div>
-
-    <!-- Item 3 -->
-    <div class="benefit-item">
-        <img src="image/tutin.jpg" alt="Tăng cường tự tin qua thực hành ngôn ngữ">
-        <div>
-            <h4 style="color: #FF4081;">Tăng cường tự tin qua thực hành ngôn ngữ</h4>
-            <p>Cung cấp môi trường luyện tập giúp học viên tự tin hơn.</p>
-        </div>
-    </div>
-
-    <!-- Item 4 -->
-    <div class="benefit-item">
-        <img src="image/time.png" alt="Tiết kiệm thời gian học tập">
-        <div>
-            <h4 style="color: #FF9800;">Tiết kiệm thời gian học tập</h4>
-            <p>Giúp học viên tiếp thu kiến thức nhanh chóng và hiệu quả.</p>
-        </div>
-    </div>
-
-    <!-- Item 5 -->
-    <div class="benefit-item">
-        <img src="image/lotrinh.jpg" alt="Đưa ra lộ trình học hiệu quả hơn">
-        <div>
-            <h4 style="color: #9C27B0;">Đưa ra lộ trình học hiệu quả hơn</h4>
-            <p>Lập kế hoạch học phù hợp với khả năng của từng người.</p>
-        </div>
-    </div>
-
-    <!-- Call to Action -->
-    <div class="cta-button">
-        <a href="#">CÁC Ý KIẾN PHÁT BIỂU TẠI HỘI THẢO</a>
-    </div>
-</div>
-
-<!-- Speaker Section -->
-<style>
-    /* Apple-style minimalist design */
-    * {
-        box-sizing: border-box;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-        justify-content: center;
-        background-color: #f9f9f9;
-        padding: 20px;
-    }
-
-    .speaker-card {
-        background-color: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        max-width: 300px;
-        text-align: center;
-        padding: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .speaker-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
-    }
-
-    .speaker-card img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin-bottom: 20px;
-    }
-
-    .speaker-card h3 {
-        font-size: 1.2em;
-        font-weight: 600;
-        color: #333333;
-        margin-bottom: 10px;
-    }
-
-    .quote {
-        font-style: italic;
-        color: #555555;
-        font-size: 0.9em;
-        line-height: 1.4em;
-        margin-bottom: 15px;
-    }
-
-    .speaker-description {
-        font-size: 0.85em;
-        color: #777777;
-        line-height: 1.6em;
-    }
-</style>
-
-<div class="container">
-    <div class="speaker-card">
-        <img src="image/tk.jpg" alt="Speaker 1">
-        <h3>TS. Hoàng Thị Hương Trà</h3>
-        <p class="quote">"Trí tuệ nhân tạo sẽ làm thay đổi cách chúng ta học và dạy ngoại ngữ."</p>
-        <div class="speaker-description">Thượng tá, TS. Hoàng Thị Hương Trà - Trưởng Khoa CB4-T09</div>
-    </div>
-    <div class="speaker-card">
-        <img src="image/duc.jpg" alt="Speaker 2">
-        <h3>Ông Nguyễn Anh Đức</h3>
-        <p class="quote">"Sự kết hợp giữa công nghệ và giáo dục sẽ mang lại hiệu quả bất ngờ."</p>
-        <div class="speaker-description">Ông Nguyễn Anh Đức - Chủ tịch HĐQT Smartcom English, chuyên gia giảng dạy IELTS</div>
-    </div>
-
-    <div class="speaker-card">
-        <img src="image/cand.png" alt="Speaker 10">
-        <h3>Đại biểu P4, X02</h3>
-        <p class="quote">"Chia sẻ kinh nghiệm về ứng dụng của trí tuệ nhân tạo vào giảng dạy học ngoại ngữ"</p>
-        <div class="speaker-description">Thượng tá, TS. Khổng Minh Hoàng Việt - P4-X02</div>
-    </div>
-
-    <div class="speaker-card">
-        <img src="image/haucan.png" alt="Speaker 7">
-        <h3>Đại biểu Đại học Kỹ thuật Hậu Cần CAND</h3>
-        <p class="quote">"Trí tuệ nhân tạo và tương lai của dạy học Ngoại ngữ - Xu hướng và công nghệ"</p>
-        <div class="speaker-description">Trung tá Trần Thị Thu Nga, Phó Trưởng khoa, T07</div>
-    </div>
-    <div class="speaker-card">
-        <img src="image/t06.jpg" alt="Speaker 5">
-        <h3>Đại biểu Trường Đại học PCCC</h3>
-        <p class="quote">"Ứng dụng trí tuệ nhân tạo trong giảng dạy kỹ năng viết tiếng Anh cho học viên tại trường đại học PCCC"</p>
-        <div class="speaker-description">Trung tá, TS. Nguyễn Bích Ngọc - T06</div>
-    </div>
-
-    <div class="speaker-card">
-        <img src="image/logo.png" alt="Speaker 4">
-        <h3>Đại biểu Trung tâm T1-T09</h3>
-        <p class="quote">"Một số phương pháp dạy nhằm phát huy hiệu quả ứng dụng trí tuệ nhân tạo trong giảng dạy Tiếng Anh"</p>
-        <div class="speaker-description">Trung tá, ThS Nguyễn Thị Bích Hồng - Phó Giám đốc T1-T09</div>
-    </div>
-    <div class="speaker-card">
-        <img src="image/logo.png" alt="Speaker 9">
-        <h3>Đại diện Tổ Tư vấn KHCN-T09</h3>
-        <p class="quote">"Xây dựng hạ tầng Nhà trường thông minh phục vụ ứng dụng Ai trong dạy và học ngoại ngữ tại T09"</p>
-        <div class="speaker-description">Thượng tá, ThS. Đỗ Trung Tiến, PTK NV5, T09</div>
-    </div>
-    <div class="speaker-card">
-        <img src="image/hanoi.png" alt="Speaker 6">
-        <h3>Đại biểu Đại học Hà Nội</h3>
-        <p class="quote">"Tác động của Trí tuệ nhân tạo đến dạy và học Ngoại ngữ: tập trung vào tiếng Anh"</p>
-        <div class="speaker-description">TS. Đặng Thị Lan - Khoa Ngoại ngữ - ĐHHN</div>
-    </div>
-
-    <div class="speaker-card">
-        <img src="image/t02.png" alt="Speaker 8">
-        <h3>Đại biểu Học viện Cảnh sát nhân dân</h3>
-        <p class="quote">"Ứng dụng trí tuệ nhân tạo trong dạy học ngoại ngữ tại các trường Công an nhân dân: Thực trạng và một số đề xuất"</p>
-        <div class="speaker-description">Thượng tá, TS Nguyễn Thị Minh Trang - Phó Trưởng Khoa Ngoại ngữ - T02</div>
-    </div>
-
-    <div class="speaker-card">
-        <img src="image/dhnn.png" alt="Speaker 3">
-        <h3>Đại biểu ĐHNN, QĐQGHN</h3>
-        <p class="quote">"Một số trao đổi về vấn đề kiểm tra đánh giá học viên khi trí tuệ nhân tạo ra đời"</p>
-        <div class="speaker-description">ThS Khoa Anh Việt, Trường ĐHNN, ĐHQGHN</div>
-    </div>
-
-    <div class="speaker-card">
-        <img src="image/cand.png" alt="Speaker 10">
-        <h3>Các ý kiến phát biểu khác</h3>
-        <p class="quote">"Các bài viết trao đổi, chia sẻ kinh nghiệm về ứng dụng của AI vào giảng dạy, học tập,..."</p>
-        <div class="speaker-description">Đại biểu dự hội thảo</div>
-    </div>
-</div>
-
-<!-- Schedule Section -->
-<div class="program-schedule" id="schedule">
-    <div class="schedule-container" style="font-family: Arial, sans-serif; background-color: #f0f2f5; padding: 30px;">
-        <div style="width: 100%; max-width: 650px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); padding: 30px; margin: auto;">
-            <h2 style="text-align: center; font-size: 26px; margin-bottom: 25px; color: #2b2b2b; font-weight: 700;">CHƯƠNG TRÌNH HỘI THẢO</h2>
-
-            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">📚</div>
-                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">13:00</div>
-                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Đón tiếp đại biểu và khai mạc hội thảo</div>
-            </div>
-
-            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">🎤</div>
-                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">13:30</div>
-                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Phát biểu khai mạc và giới thiệu chương trình</div>
-            </div>
-
-            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">💼</div>
-                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">14:00</div>
-                <div style="color: #5f6368; font-size: 15px; margin-left: 15px; text-align: left;">Đại biểu tham luận</div>
-            </div>
-
-            <div class="event-item" style="display: flex; align-items: center; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">🏆</div>
-                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">16:00</div>
-                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Tổng kết hội thảo</div>
-            </div>
-
-            <div class="event-item" style="display: flex; align-items: center; transition: transform 0.2s, box-shadow 0.2s;">
-                <div class="icon" style="width: 50px; height: 50px; border-radius: 50%; background-color: #36b37e; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 22px; margin-right: 15px; transform: scale(1); transition: transform 0.3s;">🍽️</div>
-                <div style="font-weight: bold; color: #2b2b2b; font-size: 16px; width: 60px; text-align: right;">16:15</div>
-                <div style="color: #5f6368; font-size: 15px; margin-left: 15px;">Chụp ảnh, tiệc trà</div>
+        <div class="section">
+            <span class="title">Hình ảnh về sáng kiến</span>
+            <div class="slideshow">
+                <img src="image/1.png" alt="Sáng kiến 1">
+                <img src="image/2.png" alt="Sáng kiến 2">
+                <img src="image/3.png" alt="Sáng kiến 3">
+                <img src="image/4.png" alt="Sáng kiến 3">
+                <img src="image/5.png" alt="Sáng kiến 3">
             </div>
         </div>
-    </div>
-</div>
 
-<style>
-    /* Icon Hover Animation */
-    .event-item:hover .icon {
-        transform: scale(1.1);
-    }
+        <div class="section">
+            <span class="title">Thực trạng và thách thức</span>
+            <div class="video-section">
+                <div class="image">
+                    <img src="image/thuctrang.png" alt="Hình minh họa thực trạng và thách thức">
+                </div>
+            </div>
+        </div>
 
-    /* Event Item Hover Effect */
-    .event-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
+        <div class="section">
+            <span class="title">Lý do lựa chọn sáng kiến</span>
+            <div class="video-section">
+                <div class="image">
+                    <img src="image/lydo.png" alt="Hình minh họa thực trạng và thách thức">
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <span class="title">Chức năng của phần mềm</span>
+            <div class="video-section">
+                <div class="image">
+                    <img src="image/chucnang.png" alt="Hình minh họa thực trạng và thách thức">
+                </div>
+            </div>
+        </div>
 
-    .row {
-        display: flex;
-        padding: 12px 0;
-        border-bottom: 1px solid #e0e0e0;
-        transition: background-color 0.3s ease;
-    }
-    .row:nth-child(odd) {
-        background-color: #ffffff;
-    }
-    .row:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    .row:hover {
-        background-color: #e6f7ff; /* Màu nền sáng hơn khi hover */
-    }
-    .column {
-        color: #3c3c43;
-    }
-    .column.author {
-        flex: 1;
-        font-weight: 500;
-    }
-    .column.article {
-        flex: 2;
-    }
-
-</style>
+        <div class="section">
+            <span class="title">Video minh họa</span>
+            <div class="video-embed">
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/wK9R1djeUHc?si=ONm-P19JQZKp5jNh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
 
 
-<!-- bai viet -->
-<div style="max-width: 800px; margin: 40px auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #1d1d1f; background-color: #f9f9f9; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 24px;">
-    <h2 style="text-align: center; color: #1d1d1f; font-size: 24px; font-weight: 600; margin-bottom: 24px;">DANH MỤC BÀI VIẾT</h2>
-    
-    <!-- Search Input -->
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <input type="text" id="searchInput" placeholder="Tìm kiếm bài viết..." onkeyup="filterContent()" style="width: 80%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;">
-    </div>
-    
-    <!-- Tab Navigation -->
-    <div class="tab-container">
-        <button class="tab-link active" onclick="openTab(event, 'tab1')">Bài viết 1-10</button>
-        <button class="tab-link" onclick="openTab(event, 'tab2')">Bài viết 11-20</button>
-        <button class="tab-link" onclick="openTab(event, 'tab3')">Bài viết 21-38</button>
-    </div>
+    </main>
 
-    <!-- Tab Content -->
-    <div id="tab1" class="tab-content" style="display: block;">
-<div class="row">
-    <div class="column author">Thiếu tướng, PGS.TS Lê Hoài Nam - Hiệu trưởng Trường Cao đẳng CSND I</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo trong giáo dục và những vấn đề đặt ra đối với công tác giáo dục, đào tạo của trường Cao đẳng Cảnh sát nhân dân I</div>
-</div>
-<div class="row">
-    <div class="column author">Đại tá, TS Đàm Văn Thuỷ - Phó Hiệu trưởng Trường Cao đẳng CSND I</div>
-    <div class="column article">Ứng dụng công nghệ số trong dạy và học ngoại ngữ tại Trường Cao đẳng Cảnh sát nhân dân I</div>
-</div>
+    <footer>
+        <p>&copy; 2024 Khoa Ngoại Ngữ - Tin học. All rights reserved.</p>
+    </footer>
 
-<div class="row">
-    <div class="column author">Nguyễn Anh Đức - Chủ tịch HĐQT Smartcom English</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo vào giảng dạy Ielts những vấn đề thực tiễn và bài học kinh nghiệm</div>
-</div>
-<div class="row">
-    <div class="column author">ThS. Khoa Anh Việt - Trường ĐH Ngoại ngữ - ĐH QGHN</div>
-    <div class="column article">Một số trao đổi về vấn đề kiểm tra đánh giá học viên khi trí tuệ nhân tạo (AI) ra đời</div>
-</div>
-<div class="row">
-    <div class="column author">Thượng tá, TS Hoàng Thị Hương Trà - Trưởng Khoa CB4 - T09</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo trong giảng dạy tiếng Anh xu hướng tất yếu trong bối cảnh chuyển đổi số giáo dục hiện nay</div>
-</div>
-<div class="row">
-    <div class="column author">Thượng tá, ThS. Lê Thị Hạnh- Khoa Ngoại ngữ - Tin học, T08
-</div>
-    <div class="column article">Dạy và học tiếng Anh trong xu thế phát triển của trí tuệ nhân tạo</div>
-</div>
-<div class="row">
-    <div class="column author">Thượng tá, TS Nguyễn Thị Minh Trang - Phó Trưởng Khoa Ngoại ngữ - T02</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy học ngoại ngữ tại các trường Công an nhân dân: Thực trạng và một số đề xuất.</div>
-</div>
-<div class="row">
-    <div class="column author">Trung tá, TS Nguyễn Bích Ngọc - Phó Trưởng Khoa Khoa học cơ bản và ngoại ngữ - T06</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy kỹ năng viết tiếng Anh tại trường Đại học Phòng cháy chữa cháy</div>
-</div>
-<div class="row">
-    <div class="column author">Trung tá Trần Thị Thu Nga - Phó Trưởng Khoa Khoa học cơ bản và ngoại ngữ - T07</div>
-    <div class="column article">AI và tương lai của dạy học ngoại ngữ - xu hướng và công nghệ</div>
-</div>
-<div class="row">
-    <div class="column author">Thiếu tá, ThS Hồ Thị Xuân Thanh - Viện Khoa học Cảnh sát – T02</div>
-    <div class="column article">Thuận lợi và thách thức khi ứng dụng trí tuệ nhân tạo vào dạy và học ngoại ngữ hiện nay</div>
-</div>
-    </div>
-
-   <div id="tab2" class="tab-content" style="display: none;">
-<div class="row">
-    <div class="column author">Đại úy Ngô Minh Tú - Khoa Khoa học cơ bản và ngoại ngữ - T06</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy học kết hợp môn tiếng Anh
-tại trường Đại học Phòng cháy chữa cháy.</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">Đặng Thị Lan - Khoa Sau đại học - Trường Đại học Hà Nội</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo trong dạy học kết hợp môn tiếng Anh
-tại trường Đại học Phòng cháy chữa cháy.</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">ThS. Vũ Quỳnh Nga- Khoa Ngoại ngữ - Học viện Tài chính</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo để giúp sinh viên tự luyện tập kỹ năng
-nói tiếng Anh tại Học viện Tài chính</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">ThS. Nguyễn Thị Hồng Mến - Bộ môn Ngoại ngữ – Khoa Cơ bản Học viện Chính sách và Phát triển</div>
-    <div class="column article">Phát huy vài trò của ChatGPT trong giảng dạy tiếng Anh giao tiếp</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">Thượng tá, ThS Bùi Khắc Hải - Phó Trưởng khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Ứng dụng AI trong việc cá nhân hoá học tập ngoại ngữ tại Trường Cao đẳng Cảnh sát nhân dân I: Lợi ích và thực tiễn</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">Trung tá, ThS Phùng Thị Thu - Phó Trưởng khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Ưu điểm và nhược điểm của trí tuệ nhân tạo trong dạy và học ngoại ngữ hiện nay</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">Trung tá, ThS Hoàng Hương Giang- Phó Trưởng khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Sử dụng trí tuệ nhân tạo hỗ trợ quá trình dạy học ngoại ngữ - xu hướng giáo dục mới</div>
-</div>
-
-<div class="row">
-    <div class="column author">Thượng tá, TS Bùi Bảo Kiếm- Phó Trưởng phòng Chính trị - T09</div>
-    <div class="column article">AI trong dạy và học: Công cụ tương tác hiện đại cho học viên Trường Cao đẳng Cảnh sát nhân dân I</div>
-</div>
-
-<div class="row">
-    <div class="column author">Thượng tá, ThS Hoàng Sỹ Thành- Phó Trưởng Khoa Nghiệp vụ cơ bản - T09</div>
-    <div class="column article">AI và vai trò của nhà giáo trong thời đại giáo dục 4.0</div>
-</div>
-</div>
-
-
-    <div id="tab3" class="tab-content" style="display: none;">
-<div class="row">
-    <div class="column author">Thượng tá, ThS Nguyễn Thị Quỳnh Trang- Phó Giám đốc Trung tâm T1-T09</div>
-    <div class="column article">Sử dụng các ứng dụng AI nhằm tối ưu hoá việc tự học tiếng Anh</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">Thiếu tá Nguyễn Tài Thọ; Đại úy Bùi Thanh Lam- Phòng Quản lý đào tạo - T09</div>
-    <div class="column article">Ứng dụng công nghệ trí tuệ nhân tạo (AI) trong dạy học tích hợp
-nội dung và ngôn ngữ môn tiếng Anh tại Trường Cao đẳng Cảnh sát nhân dân I</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">Đại úy, ThS Vũ Mạnh Tùng- Phòng Khảo thí & đảm bảo chất lượng đào tạo - T09</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo trong phân tích kết quả học tập môn
-tiếng Anh: Cơ hội và thách thức</div>
-</div>
-
-<div class="row">
-    <div class="column author">Trung tá, ThS Khổng Thị Thu Hằng - Khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Ứng dụng ChatGPT để cải thiện kỹ năng giao tiếp tiếng Anh cho
-học viên Trường Cao đẳng Cảnh sát nhân dân I</div>
-</div>
-
-<div class="row">
-    <div class="column author">Trung tá, ThS Nguyễn Sỹ Minh - Khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Ứng dụng trí tuệ nhân tạo (AI) trong dạy học ngoại ngữ tại các
-trường công an: Cơ hội và thách thức</div>
-</div>
-
-
-<div class="row">
-    <div class="column author">Thiếu tá, Ths Nguyễn Thị Thu Trang - Khoa CB4  và Thiếu tá, ThsVũ Thị Ngọc Thúy
-Khoa Luật - T09</div>
-    <div class="column article">Ứng dụng AI để nâng cao kỹ năng nói tiếng Anh cho học viên Trường Cao đẳng Cảnh sát nhân dân I</div>
-</div>
-
-<div class="row">
-    <div class="column author">Thiếu tá, ThS Hoàng Thị Dịu Huyền - Khoa Ngoại ngữ- Tin học - T09</div>
-    <div class="column article">Ứng dụng Chatbots hỗ trợ việc dạy và học tiếng Anh tại Trường
-Cao đẳng Cảnh sát nhân dân I</div>
-</div>
-
-<div class="row">
-    <div class="column author">Trung tá, ThS Nguyễn Thị Hoàng Yến-Khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Ứng dụng công cụ trí tuệ nhân tạo trong giảng dạy nhằm nâng cao chất lượng đào tạo tại Khoa Ngoại ngữ - Tin học</div>
-</div>
-
-<div class="row">
-    <div class="column author">Thiếu tá, ThS Nguyễn Thị Thu Hằng - Khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Sử dụng AI tối ưu thời gian giảng dạy cho giáo viên tiếng Anh, góp phần nâng cao chất lượng giáo dục đào tạo tại Trường Cao đẳng CSND I</div>
-</div>
-
-<div class="row">
-    <div class="column author">Thiếu tá, ThS Vũ Thị Thêu - Khoa Ngoại ngữ - Tin học - T09</div>
-    <div class="column article">Một số ứng dụng AI trong hỗ trợ học tiếng Anh</div>
-</div>
-
-
-    <div class="row">
-         <div class="column author">Thiếu tá, ThS Nguyễn Thanh Thuý - Khoa Ngoại ngữ - Tin học - T09</div>
-         <div class="column article">Ứng dụng phần mềm Canva AI vào việc tạo hình ảnh, video trong thiết kế bài giảng điện tử môn tiếng Anh của Khoa Ngoại ngữ - Tin học</div>
-    </div>
-
-
-    <div class="row">
-         <div class="column author">Thiếu tá, ThS Hoàng Thị Ngọc Mai - Khoa Ngoại ngữ - Tin học - T09</div>
-         <div class="column article">Quản lý trí tuệ nhân tạo (AI) kinh nghiệm thế giới và khuyến nghị cho Việt Nam</div>
-    </div>
-
-    <div class="row">
-         <div class="column author">Thiếu tá, ThS Doãn Thị Hương - Khoa Ngoại ngữ - Tin học - T09</div>
-         <div class="column article">Ứng dụng công nghệ AI trong thiết kế bài giảng điện tử</div>
-    </div>
-
-
-    <div class="row">
-         <div class="column author">Thiếu tá, ThS Lê Thị Thuỷ - Khoa Ngoại ngữ - Tin học - T09</div>
-         <div class="column article">Ứng dụng AI để nâng cao kỹ năng viết tiếng Anh cho học viên Trường Cao đẳng Cảnh sát nhân dân I</div>
-    </div>
-
-
-    <div class="row">
-         <div class="column author">Thiếu tá Nguyễn Đình Hoàng - Khoa Ngoại ngữ-Tin học - T09</div>
-         <div class="column article">Công nghệ AI hỗ trợ vai trò của giáo viên trong quá trình giáo dục</div>
-    </div>
-
-    <div class="row">
-         <div class="column author">Thiếu tá, ThS Nguyễn Thị Thuỷ- Khoa Ngoại ngữ - Tin học – T09</div>
-         <div class="column article">Một số gợi ý về ứng dụng trí tuệ nhân tạo trong dạy tiếng Anh
-tại trường Cao đẳng Cảnh sát nhân dân I</div>
-    </div>
-
-    <div class="row">
-         <div class="column author">Cử nhân Phạm Hiền Linh - Cao học QH2022D2, ĐHNN- ĐHQuốc gia Hà Nội</div>
-         <div class="column article">Kinh nghiệm sử dụng các Prompts trong ChatGPT góp phần nâng cao hiệu quả trong công tác dạy và học tiếng Anh hiện nay</div>
-    </div>
-
-</div>
-
-<style>
-    /* Style for tab buttons */
-    .tab-link {
-        padding: 8px 16px;
-        border: none;
-        background-color: #f0f0f5;
-        color: #007aff;
-        border-radius: 8px;
-        font-weight: 500;
-        margin-right: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-    }
-    .tab-link.active {
-        background-color: #007aff;
-        color: white;
-    }
-    .tab-link:hover {
-        background-color: #d0eaff;
-    }
-</style>
-
-<script>
-function openTab(evt, tabName) {
-    const tabContent = document.getElementsByClassName("tab-content");
-    for (let i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
-    }
-
-    const tabLinks = document.getElementsByClassName("tab-link");
-    for (let i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].classList.remove("active");
-    }
-
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.classList.add("active");
-}
-
-function filterContent() {
-    const searchInput = document.getElementById("searchInput").value.toLowerCase();
-    const tabContents = document.getElementsByClassName("tab-content");
-
-    for (let i = 0; i < tabContents.length; i++) {
-        const rows = tabContents[i].getElementsByClassName("row");
-
-        for (let j = 0; j < rows.length; j++) {
-            const author = rows[j].getElementsByClassName("author")[0].textContent.toLowerCase();
-            const article = rows[j].getElementsByClassName("article")[0].textContent.toLowerCase();
-
-            if (author.includes(searchInput) || article.includes(searchInput)) {
-                rows[j].style.display = "";
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === '123') {
+                document.getElementById('welcome-screen').style.display = 'none';
             } else {
-                rows[j].style.display = "none";
+                alert('Mật khẩu sai!');
             }
         }
-    }
-}
-</script>
 
-<style>
-    .tab-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 24px;
-    }
+        const images = document.querySelectorAll('.slideshow img');
+        let currentImageIndex = 0;
 
-    .tab-link {
-        background-color: #f5f5f7;
-        border: 1px solid transparent;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s, border-color 0.3s;
-        border-radius: 8px;
-        margin-right: 5px;
-    }
-
-    .tab-link:hover {
-        background-color: #e0e0e5;
-    }
-
-    .tab-link.active {
-        background-color: #007aff;
-        color: #fff;
-        font-weight: 500;
-    }
-
-    .tab-content {
-        display: none;
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .row {
-        display: flex;
-        padding: 12px 0;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    .column {
-        padding: 5px;
-        font-size: 16px;
-    }
-
-    .author {
-        width: 30%;
-        color: #007aff;
-        font-weight: 500;
-    }
-
-    .article {
-        width: 70%;
-        color: #1d1d1f;
-    }
-
-    .tab-content .row:last-child {
-        border-bottom: none;
-    }
-</style>
-
-<script>
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        tablinks = document.getElementsByClassName("tab-link");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
-
-
-<script>
-    function openTab(evt, tabId) {
-        var i, tabcontent, tablinks;
-
-        // Hide all tab contents
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Remove "active" class from all tab links
-        tablinks = document.getElementsByClassName("tab-link");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the selected tab content and add "active" class to the clicked tab
-        document.getElementById(tabId).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
-
-
-<footer>
-    <p>© Create by: Khoa Ngoại ngữ - Tin học, Trường Cao đẳng CSND I.</p>
-</footer>
-
-
-<script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.display = (i === index) ? 'block' : 'none';
-        });
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        showSlide(currentSlide);
-    }
-
-    showSlide(currentSlide);
-    setInterval(nextSlide, 3000);
-</script>
-
+        setInterval(() => {
+            images[currentImageIndex].style.display = 'none';
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images[currentImageIndex].style.display = 'block';
+        }, 3000);
+    </script>
 </body>
 </html>
