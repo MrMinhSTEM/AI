@@ -1,330 +1,745 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài dự thi: Tìm hiểu Luật Dữ liệu trong Công an nhân dân</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot AI hỗ trợ học tập môn Tin học</title>
+  <meta name="description" content="Website giới thiệu sáng kiến Xây dựng Chatbot AI hỗ trợ học tập môn Tin học" />
+  <style>
+    :root{
+      --bg:#f3f6f4;
+      --bg-2:#e8eee9;
+      --ink:#15251d;
+      --muted:#5a6b60;
+      --line:#d6e0d8;
+      --card:#ffffff;
+      --primary:#0b5a43;
+      --primary-2:#08382b;
+      --accent:#b8892f;
+      --accent-soft:#f3ead6;
+      --gold:#c79a3b;
+      --shadow:0 18px 46px rgba(11,42,29,.10);
+      --shadow-lg:0 26px 70px rgba(11,42,29,.16);
+      --r:24px;
+      --max:1280px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f7faf7 0%,#eef4f0 55%,#e7efe9 100%)}
+    body.locked{overflow:hidden}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    .bg{position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+      radial-gradient(circle at 0% 0%, rgba(199,154,59,.12), transparent 26%),
+      radial-gradient(circle at 100% 10%, rgba(11,90,67,.14), transparent 24%),
+      linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,0));}
 
-        body {
-            background-color: #f5f5f7;
-            color: #1d1d1f;
-            line-height: 1.6;
-            font-smooth: antialiased;
-        }
+    .gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(7,18,30,.40);backdrop-filter:blur(10px);z-index:50}
+    .gate.hidden{display:none}
+    .gate-card{width:min(1040px,100%);display:grid;grid-template-columns:1.05fr .95fr;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.65);border-radius:30px;overflow:hidden;box-shadow:var(--shadow-lg)}
+    .gate-left{padding:48px;background:linear-gradient(135deg,#0f6b5c,#083a32 72%);color:#fff;position:relative;overflow:hidden}
+    .gate-left:before,.gate-left:after{content:"";position:absolute;border-radius:50%;filter:blur(4px);opacity:.2}
+    .gate-left:before{width:260px;height:260px;background:#6cc3ff;right:-90px;top:-40px}
+    .gate-left:after{width:220px;height:220px;background:#d8b15c;left:-70px;bottom:-80px}
+    .brandline{display:flex;align-items:center;gap:12px;margin-bottom:22px;position:relative;z-index:1}
+    .brandline .mark{width:52px;height:52px;border-radius:16px;background:#fff;padding:7px;box-shadow:0 10px 30px rgba(0,0,0,.16)}
+    .gate-left h1{font-size:clamp(1.7rem,2.4vw,2.4rem);line-height:1.18;margin:0 0 14px;position:relative;z-index:1}
+    .gate-left p{font-size:1.03rem;line-height:1.7;max-width:520px;opacity:.96;position:relative;z-index:1}
+    .gate-badges{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;position:relative;z-index:1}
+    .gate-badges span{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-size:.92rem}
+    .gate-right{padding:42px}
+    .gate-right h2{font-size:1.45rem;margin:0 0 8px}
+    .gate-right p{margin:0 0 20px;color:var(--muted)}
+    .form-group{display:grid;gap:14px;margin-top:18px}
+    .input{padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:#f5f8fc;font-size:1rem;outline:none;transition:.2s}
+    .input:focus{border-color:#7db6ff;box-shadow:0 0 0 4px rgba(45,140,255,.12);background:#fff}
+    .btn{border:0;border-radius:16px;padding:14px 20px;font-weight:700;cursor:pointer;transition:.22s}
+    .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;box-shadow:0 10px 24px rgba(15,107,92,.18)}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .hint{font-size:.94rem;color:var(--muted);line-height:1.6}
+    .error{min-height:22px;color:#d12f2f;font-weight:600}
 
-        #welcome-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-            color: #fff;
-            text-align: center;
-        }
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(247,250,247,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(214,224,216,.92)}
+    .topbar-inner{max-width:var(--max);margin:auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1rem}
+    .brand .mark{width:44px;height:44px;border-radius:14px;background:#fff;padding:6px;box-shadow:var(--shadow)}
+    .brand small{display:block;font-weight:600;color:var(--muted);font-size:.8rem;margin-top:2px}
+    .nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.96rem;color:#314258}
+    .nav a{padding:10px 12px;border-radius:12px;transition:.2s}
+    .nav a:hover{background:#eef4fb;color:var(--primary)}
 
-        #welcome-screen h1 {
-            margin-bottom: 20px;
-            font-size: 2.5rem;
-        }
+    .container{max-width:var(--max);margin:auto;padding:0 22px}
+    .hero{padding:34px 0 12px}
+    .hero-card{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch;background:linear-gradient(135deg,#fcfdfc,#f2f6f2 58%,#eaf0eb 100%);border:1px solid rgba(214,224,216,.9);box-shadow:var(--shadow-lg);border-radius:34px;padding:34px;overflow:hidden;position:relative}
+    .hero-card:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle, rgba(199,154,59,.16), transparent 68%)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:var(--accent-soft);color:#6f5119;font-weight:700;font-size:.88rem}
+    .hero h1{font-size:clamp(1.8rem,3.2vw,3.1rem);line-height:1.14;margin:16px 0}
+    .hero p{font-size:1.05rem;color:var(--muted);line-height:1.8;margin:0}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn-outline{background:#fff;border:1px solid var(--line);color:#214062}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+    .stat{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow)}
+    .stat strong{display:block;font-size:1.45rem;color:var(--primary)}
+    .stat span{display:block;color:var(--muted);font-size:.94rem;line-height:1.5;margin-top:6px}
 
-        #welcome-screen input {
-            margin-top: 10px;
-            padding: 12px 15px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+    .hero-side{display:grid;gap:16px}
+    .mini-panel,.shot-card,.section-card,.feature-card,.timeline-card,.slide-shell,.footer-card,.gallery-card{background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow)}
+    .mini-panel{padding:22px}
+    .mini-panel h3{margin:0 0 10px;font-size:1.1rem}
+    .mini-panel ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.75}
+    .shot-card{padding:14px;background:linear-gradient(180deg,#fbfdff,#f3f7fb)}
+    .shot-frame{border-radius:20px;overflow:hidden;border:1px solid #d7e1ee;background:#fff}
 
-        #welcome-screen button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 8px;
-            background: #0071e3;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+    section{padding:22px 0}
+    .section-top{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}
+    .section-top h2{font-size:clamp(1.35rem,2.4vw,2rem);margin:0}
+    .section-top p{max-width:820px;color:var(--muted);line-height:1.8;margin:6px 0 0}
+    .tagline{font-size:.85rem;color:#6f5119;font-weight:700;background:#f3ead6;padding:8px 12px;border-radius:999px;display:inline-flex}
+    .grid{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .section-card{padding:24px}
+    .kpi{display:flex;gap:14px;align-items:flex-start}
+    .kpi .num{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#0f6b5c,#0d5246);color:#fff;display:grid;place-items:center;font-weight:800;flex:0 0 auto}
+    .section-card h3{margin:0 0 8px;font-size:1.14rem}
+    .section-card p,.section-card li{color:var(--muted);line-height:1.75}
+    .section-card ul{padding-left:18px;margin:10px 0 0}
 
-        #welcome-screen button:hover {
-            background: #005bb5;
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
-        }
+    .timeline-card{padding:28px}
+    .timeline{position:relative;padding-left:28px}
+    .timeline:before{content:"";position:absolute;left:9px;top:4px;bottom:4px;width:2px;background:linear-gradient(180deg,var(--primary),#c8d9ef)}
+    .timeline-item{position:relative;padding:0 0 24px 18px}
+    .timeline-item:last-child{padding-bottom:0}
+    .timeline-item:before{content:"";position:absolute;left:-2px;top:7px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--primary);box-shadow:0 0 0 7px rgba(15,107,92,.08)}
+    .timeline-item h4{margin:0 0 6px;font-size:1.05rem}
+    .timeline-item p{margin:0;color:var(--muted);line-height:1.75}
 
-        header {
-            background: linear-gradient(to bottom, #f5f5f7, #e5e5ea);
-            color: #1d1d1f;
-            text-align: center;
-            padding: 40px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .slide-shell{padding:18px;background:linear-gradient(180deg,#fff,#f8fbff)}
+    .slide-view{position:relative;min-height:610px;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#0b5a43,#0a2f25)}
+    .slide{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.06fr;opacity:0;visibility:hidden;transition:opacity .55s ease, visibility .55s ease}
+    .slide.active{opacity:1;visibility:visible}
+    .slide-copy{padding:38px 34px;color:#fff;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(8,56,43,.97),rgba(10,47,37,.94))}
+    .slide-copy .badge{display:inline-flex;width:max-content;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:8px 12px;border-radius:999px;font-size:.9rem;font-weight:700;margin-bottom:18px}
+    .slide-copy h3{font-size:1.7rem;line-height:1.22;margin:0 0 12px}
+    .slide-copy p{margin:0;color:rgba(255,255,255,.86);line-height:1.8}
+    .slide-copy ul{margin:18px 0 0;padding-left:18px;line-height:1.75;color:rgba(255,255,255,.9)}
+    .slide-image{padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.06));display:flex;align-items:center;justify-content:center}
+    .slide-image figure{margin:0;background:#fff;border-radius:24px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.16);width:100%;height:100%;display:flex;flex-direction:column}
+    .slide-image img{width:100%;height:100%;object-fit:contain;border-radius:16px;border:1px solid #e1e8f2;background:#fafcff}
+    .slide-image figcaption{font-size:.94rem;color:#4f6078;margin-top:10px;font-weight:600}
+    .slide-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px}
+    .dots{display:flex;gap:8px;flex-wrap:wrap}
+    .dot{width:12px;height:12px;border-radius:50%;border:none;background:#cad7e6;cursor:pointer;transition:.2s}
+    .dot.active{width:34px;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+    .ctrls{display:flex;gap:10px}
+    .ctrl-btn{border:1px solid var(--line);background:#fff;color:#244266;padding:11px 14px;border-radius:14px;cursor:pointer;font-weight:700}
 
-        header img {
-            width: 100px;
-            height: auto;
-            margin-bottom: 20px;
-        }
+    .feature-card{padding:18px;display:grid;grid-template-columns:1fr 1.05fr;gap:22px;align-items:center;overflow:hidden}
+    .feature-card.reverse{grid-template-columns:1.05fr 1fr}
+    .feature-copy{padding:10px 6px 10px 6px}
+    .feature-copy .index{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:14px;background:#eaf6f4;color:var(--primary);font-weight:800;margin-bottom:12px}
+    .feature-copy h3{margin:0 0 10px;font-size:1.24rem;line-height:1.3}
+    .feature-copy p{margin:0;color:var(--muted);line-height:1.8}
+    .feature-copy ul{margin:14px 0 0;padding-left:18px;color:var(--muted);line-height:1.8}
+    .feature-media{background:linear-gradient(180deg,#fbfdff,#f1f6fb);border:1px solid #dbe5f0;border-radius:22px;padding:14px}
+    .feature-media img{border-radius:16px;border:1px solid #dee7f1;background:#fff}
 
-        header h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
+    .gallery-card{padding:18px}
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .thumb{border-radius:18px;overflow:hidden;border:1px solid #dbe5f0;background:#fff;box-shadow:var(--shadow)}
+    .thumb img{aspect-ratio:16/9;object-fit:cover;width:100%}
+    .thumb span{display:block;padding:10px 12px;font-size:.92rem;font-weight:700;color:#415267}
 
-        .content {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 15px;
-        }
+    .footer{padding:18px 0 36px}
+    .footer-card{padding:26px;text-align:center;background:linear-gradient(135deg,#0b5a43,#08382b);color:#fff}
+    .footer-card h3{margin:0 0 10px;font-size:1.5rem}
+    .footer-card p{margin:0 auto;color:rgba(255,255,255,.9);max-width:860px;line-height:1.8}
 
-        .section {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.show{opacity:1;transform:none}
 
-        .section .title {
-            display: inline-block;
-            background: linear-gradient(to right, #0071e3, #005bb5);
-            color: #fff;
-            font-size: 1rem;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 20px;
-            margin: 0 auto 20px;
-            text-align: center;
-        }
-
-        .author-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .author-card {
-            background: #f9f9f9;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .author-card img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .slideshow img {
-            width: 100%;
-            max-width: 100%;
-            border-radius: 12px;
-        }
-
-        .video-section .image img {
-            max-width: 100%;
-        }
-
-        .video-embed {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            width: 100%;
-            max-width: 600px;
-            background: #000;
-            border-radius: 12px;
-        }
-
-        .video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        footer {
-            background: #f5f5f7;
-            color: #6e6e73;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        footer p {
-            font-size: 0.8rem;
-        }
-
-        @media (max-width: 768px) {
-            header h2 {
-                font-size: 1.5rem;
-            }
-
-            .author-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .section .title {
-                font-size: 0.9rem;
-                padding: 8px 16px;
-            }
-
-            .video-embed {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header img {
-                width: 80px;
-            }
-
-            header h2 {
-                font-size: 1.2rem;
-                text-align: center;
-            }
-
-            .author-card {
-                width: 90%;
-            }
-
-            .video-embed {
-                max-width: 100%;
-            }
-
-            footer p {
-                font-size: 0.7rem;
-            }
-        }
-    </style>
+    @media (max-width:1120px){
+      .hero-card,.gate-card,.slide,.feature-card,.feature-card.reverse{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .grid-3,.gallery{grid-template-columns:repeat(2,1fr)}
+      .slide-view{min-height:860px}
+    }
+    @media (max-width:760px){
+      .nav{display:none}
+      .container,.topbar-inner{padding-left:14px;padding-right:14px}
+      .hero-card,.timeline-card,.section-card,.slide-shell,.feature-card,.gallery-card,.footer-card{border-radius:22px}
+      .stats,.grid-2,.grid-3,.gallery{grid-template-columns:1fr}
+      .slide-view{min-height:920px}
+      .hero-card{padding:22px}
+      .slide-copy{padding:24px 22px}
+      .slide-image{padding:16px}
+      .gate-left,.gate-right{padding:24px}
+      .gate-left h1{font-size:2rem}
+    }
+  </style>
 </head>
-<body>
-  
-    <header>
-        <img src="image/logo.png" alt="Logo">
-        <h2>Bài dự thi: Tìm hiểu Luật Dữ liệu trong Công an nhân dân</h2>
-    </header>
+<body class="locked">
+  <div class="bg"></div>
 
-    <main class="content">
-        <div class="author-cards">
-            <div class="author-card">
-                <img src="image/minh.jpg" alt="Tác giả 1">
-                <h3>Tác giả 1</h3>
-                <p>Trung tá Nguyễn Sỹ Minh</p>
-            </div>
-            <div class="author-card">
-                <img src="image/Hang.jpg" alt="Tác giả 2">
-                <h3>Tác giả 2</h3>
-                <p>Trung tá Nguyễn Thị Thu Hằng</p>
-            </div>
-            <div class="author-card">
-                <img src="image/huong.jpg" alt="Tác giả 2">
-                <h3>Tác giả 4</h3>
-                <p>Thiếu tá Doãn Thị Hương</p>
-            </div>
-            <div class="author-card">
-                <img src="image/theu.jpg" alt="Tác giả 2">
-                <h3>Tác giả 4</h3>
-                <p>Thiếu tá Vũ Thị Thêu</p>
-            </div>
+  <div class="gate" id="gate">
+    <div class="gate-card">
+      <div class="gate-left">
+        <div class="brandline">
+          <div class="mark"><img src="assets/images/logo.png" alt="Logo"></div>
+          <div>
+            <strong>Chatbox AI</strong>
+            <div style="opacity:.88;font-size:.9rem">Website giới thiệu sáng kiến</div>
+          </div>
         </div>
-
-        <div class="section">
-            <span class="title">Thuyết minh bài dự thi</span>
-              <div class="video-section" >
-                <div class="image">
-                    <img src="image/tm1.jpg" alt="Thuyết minh">
-                </div>
-                <div class="image">
-                    <img src="image/tm2.jpg" alt="Thuyết minh">
-                </div>
-            </div>  
-        
+        <h1>Chatbot AI nội bộ phục vụ học tập, tra cứu và khai thác tri thức</h1>
+        <p>Website được thiết kế theo phong cách trình lãnh đạo, tích hợp đầy đủ nội dung sáng kiến và ảnh chụp thực tế của phần mềm, giúp theo dõi nhanh bức tranh tổng thể từ mục tiêu, lộ trình triển khai đến các chức năng cốt lõi.</p>
+        <div class="gate-badges">
+          <span>Môi trường nội bộ</span>
+          <span>Hình ảnh phần mềm thực tế</span>
+          <span>Phù hợp báo cáo nghiệm thu</span>
         </div>
+      </div>
+      <div class="gate-right">
+        <h2>Đăng nhập hệ thống</h2>
+        <p>Vui lòng nhập mật khẩu để mở website giới thiệu sáng kiến.</p>
+        <div class="form-group">
+          <input class="input" id="password" type="password" placeholder="Nhập mật khẩu truy cập">
+          <button class="btn btn-primary" onclick="checkPassword()">Mở website</button>
+          <div class="error" id="error"></div>
+          <div class="hint">Mật khẩu truy cập demo: <strong>123</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="section">
-            <span class="title"> Cấu trúc bài dự thi </span>
-            <div class="video-section">
-                <div class="image">
-                    <img src="image/cautruc.jpg" alt="Hình minh họa thực trạng và thách thức">
-                </div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#top" class="brand">
+        <div class="mark"><img src="assets/images/logo.png" alt="Logo"></div>
+        <div>
+          <span style="font-size:1rem">Chatbot AI hỗ trợ học tập môn Tin học</span>
+          <small>Website giới thiệu sáng kiến 2026</small>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#gioi-thieu">Giới thiệu</a>
+        <a href="#thuc-trang">Thực trạng</a>
+        <a href="#lo-trinh">Lộ trình</a>
+        <a href="#giao-dien">Giao diện phần mềm</a>
+        <a href="#tinh-nang">Tính năng</a>
+        <a href="#hieu-qua">Hiệu quả</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container reveal">
+      <div class="hero-card">
+        <div>
+          <span class="eyebrow">Sáng kiến chuyển đổi số giáo dục • Tông xanh Công an • AI nội bộ</span>
+          <h1>Xây dựng Chatbot AI hỗ trợ học tập môn Tin học</h1>
+          <p>Hệ thống được nghiên cứu, xây dựng và phát triển nhằm hỗ trợ học viên hỏi đáp, tra cứu kiến thức, luyện tập và tương tác học tập một cách chủ động, linh hoạt; đồng thời đáp ứng yêu cầu bảo mật cao trong môi trường đào tạo nội bộ của Nhà trường.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#giao-dien">Xem hình ảnh phần mềm</a>
+            <a class="btn btn-outline" href="#tinh-nang">Khám phá tính năng</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>12</strong><span>ảnh chụp giao diện thực tế đã được tích hợp vào website</span></div>
+            <div class="stat"><strong>02</strong><span>nhóm người dùng chính: Quản trị viên và Người dùng</span></div>
+            <div class="stat"><strong>Offline</strong><span>hoạt động trong môi trường nội bộ, không phụ thuộc nền tảng AI công cộng</span></div>
+            <div class="stat"><strong>24/7</strong><span>hỗ trợ tra cứu, hỏi đáp và khai thác tri thức liên tục</span></div>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="mini-panel">
+            <h3>Thông điệp nổi bật</h3>
+            <ul>
+              <li>Chuẩn hóa tri thức môn học thành kho dữ liệu tập trung.</li>
+              <li>Giảm tải cho giáo viên trong hỗ trợ ngoài giờ học.</li>
+              <li>Tăng khả năng tự học, cá nhân hóa và tương tác của học viên.</li>
+              <li>Tạo nền tảng để mở rộng AI cho nhiều môn học khác trong nhà trường.</li>
+            </ul>
+          </div>
+          <div class="shot-card">
+            <div class="shot-frame">
+              <img src="assets/images/hinh12.png" alt="Giao diện Chatbot AI">
             </div>
+          </div>
         </div>
+      </div>
+    </section>
 
+    <section id="gioi-thieu" class="container reveal">
+      <div class="section-top">
+        <div>
+          <span class="tagline">Tổng quan sáng kiến</span>
+          <h2>1. Giới thiệu chung</h2>
+          <p>Sáng kiến được hình thành từ yêu cầu thực tiễn trong giảng dạy môn Tin học và định hướng chuyển đổi số giáo dục, hướng tới mô hình học tập hiện đại, thông minh, lấy người học làm trung tâm.</p>
+        </div>
+      </div>
+      <div class="grid grid-3">
+        <article class="section-card">
+          <div class="kpi"><div class="num">01</div><div><h3>Bối cảnh hình thành</h3><p>Người học còn thiếu công cụ tương tác tức thời; việc giải đáp thắc mắc chưa kịp thời; khả năng cá nhân hóa học tập còn hạn chế; giáo viên chịu áp lực lớn trong hỗ trợ ngoài giờ học.</p></div></div>
+        </article>
+        <article class="section-card">
+          <div class="kpi"><div class="num">02</div><div><h3>Mục tiêu chính</h3><p>Xây dựng hệ thống Chatbot AI nội bộ hỗ trợ hỏi đáp, tra cứu, luyện tập và khai thác tri thức nhanh chóng, chính xác, linh hoạt nhưng vẫn bảo đảm an toàn, bảo mật thông tin.</p></div></div>
+        </article>
+        <article class="section-card">
+          <div class="kpi"><div class="num">03</div><div><h3>Ý nghĩa thực tiễn</h3><p>Không chỉ nâng cao hiệu quả dạy và học môn Tin học, sáng kiến còn là bước đi cụ thể trong lộ trình chuyển đổi số giáo dục, góp phần xây dựng “Nhà trường thông minh”.</p></div></div>
+        </article>
+      </div>
+    </section>
 
-        <div class="section">
-            <span class="title">Phần 1.Tìm hiểu về Luật Dữ liệu trong CAND</span>
-            <div class="video-embed">
-     
-            <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" style="border: 1px solid lightgray; width: 100%; height: 400px;" src="https://heyzine.com/flip-book/451480114a.html"></iframe>
-                        
+    <section id="thuc-trang" class="container reveal">
+      <div class="section-top">
+        <div>
+          <span class="tagline">Khoảng trống cần giải quyết</span>
+          <h2>2. Thực trạng khi chưa có sáng kiến</h2>
+          <p>Dù đã có nhiều giải pháp ứng dụng công nghệ thông tin, thực tiễn giảng dạy môn Tin học vẫn còn tồn tại những hạn chế đòi hỏi một công cụ hỗ trợ học tập thông minh, bảo mật và có thể triển khai nội bộ.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <article class="section-card">
+          <h3>Những hạn chế chủ yếu</h3>
+          <ul>
+            <li>Chưa có hệ thống Chatbot AI chuyên biệt phục vụ học tập trong môi trường nội bộ.</li>
+            <li>Khó tận dụng các nền tảng AI công cộng do yêu cầu bảo mật thông tin của ngành.</li>
+            <li>Thiếu công cụ hỗ trợ tức thời cho học viên khi tự học, giải bài hoặc xử lý lỗi lập trình.</li>
+            <li>Giáo viên phải dành nhiều thời gian trả lời các câu hỏi lặp lại ngoài giờ học.</li>
+            <li>Dữ liệu học tập chưa được tổ chức thành kho tri thức thông minh để khai thác linh hoạt.</li>
+          </ul>
+        </article>
+        <article class="section-card">
+          <h3>Yêu cầu đặt ra với hệ thống mới</h3>
+          <ul>
+            <li>Hoạt động ổn định trong mạng nội bộ, không phụ thuộc Internet.</li>
+            <li>Đảm bảo 3 tiêu chí cốt lõi: Bảo mật – Chính xác – Dễ sử dụng.</li>
+            <li>Phân quyền rõ ràng cho Admin và User, hỗ trợ kiểm duyệt nội dung.</li>
+            <li>Hỗ trợ hỏi đáp bằng ngôn ngữ tự nhiên và khai thác tri thức đúng ngữ cảnh.</li>
+            <li>Có khả năng mở rộng sang các môn học và đơn vị khác trong nhà trường.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="lo-trinh" class="container reveal">
+      <div class="section-top">
+        <div>
+          <span class="tagline">Kế hoạch triển khai</span>
+          <h2>3. Lộ trình xây dựng và hoàn thiện</h2>
+          <p>Quá trình nghiên cứu, thiết kế, xây dựng và thử nghiệm hệ thống được triển khai theo từng giai đoạn rõ ràng, bảo đảm phù hợp với điều kiện thực tiễn của đơn vị.</p>
+        </div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>Tháng 10/2025 — Khảo sát và xác định yêu cầu</h4>
+            <p>Tiến hành khảo sát thực tế, xác định ý tưởng, mục tiêu, phạm vi và yêu cầu nghiệp vụ đối với hệ thống Chatbot AI trong môi trường nội bộ có yêu cầu bảo mật cao.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Từ tháng 11/2025 đến tháng 3/2026 — Thiết kế, xây dựng và chạy thử</h4>
+            <p>Thu thập, chuẩn hóa dữ liệu tri thức; xây dựng kiến trúc hệ thống; lập trình phiên bản demo; xin ý kiến góp ý của lãnh đạo, giáo viên; tổ chức thử nghiệm trong phạm vi hẹp và đánh giá sơ bộ hiệu quả.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Tháng 4/2026 — Hoàn thiện, đánh giá và đề xuất nghiệm thu</h4>
+            <p>Hoàn thiện hệ thống, đánh giá tổng thể mức độ đáp ứng yêu cầu thực tiễn, tiếp thu ý kiến các đơn vị liên quan và đề xuất nghiệm thu sáng kiến tại đơn vị.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="giao-dien" class="container reveal">
+      <div class="section-top">
+        <div>
+          <span class="tagline">Slideshow ảnh phần mềm thực tế</span>
+          <h2>4. Giao diện phần mềm nổi bật</h2>
+          <p>Khu vực trình chiếu dưới đây sử dụng trực tiếp các ảnh chụp trong tài liệu, kết hợp hiệu ứng chuyển cảnh mượt để phục vụ trình lãnh đạo, báo cáo nghiệm thu hoặc giới thiệu sản phẩm.</p>
+        </div>
+      </div>
+      <div class="slide-shell">
+        <div class="slide-view" id="slideView">
+          <article class="slide active">
+            <div class="slide-copy">
+              <span class="badge">01 • Đăng nhập hệ thống</span>
+              <h3>Điểm khởi đầu của toàn bộ trải nghiệm</h3>
+              <p>Người dùng đăng nhập để truy cập vào hệ thống Chatbot AI học tập. Giao diện sáng, rõ, dễ sử dụng, giúp tiếp cận nhanh các chức năng hỏi đáp và khai thác tri thức.</p>
+              <ul>
+                <li>Thiết kế đơn giản, trực quan.</li>
+                <li>Phù hợp triển khai trong môi trường nội bộ.</li>
+                <li>Tạo cảm giác chuyên nghiệp ngay từ lần truy cập đầu tiên.</li>
+              </ul>
             </div>
-        </div>
-        <div class="section">
-            <span class="title">Phần 2. Một số hình ảnh về lực lượng CAND tiên phong trong thực thi luật dữ liệu</span>
-            <div class="video-embed">
-     
-
-                            <iframe allowfullscreen="" allow="clipboard-write" scrolling="no" class="fp-iframe" style="border: 1px solid lightgray; width: 100%; height: 591px;" src="https://heyzine.com/flip-book/3fc7b50d61.html"></iframe>
-                        
-                        
+            <div class="slide-image"><figure><img src="assets/images/hinh3.png" alt="Đăng nhập hệ thống"><figcaption>Hình 3. Đăng nhập hệ thống</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">02 • Trang tổng quan</span>
+              <h3>Bảng điều khiển tổng hợp cho quản trị viên</h3>
+              <p>Dashboard cung cấp cái nhìn nhanh về số lượng chủ đề, nội dung tri thức, phản hồi AI và các nhóm câu hỏi nổi bật, giúp theo dõi hoạt động hệ thống tập trung.</p>
+              <ul>
+                <li>Thống kê nhanh phục vụ quản lý, chỉ đạo.</li>
+                <li>Hỗ trợ phát hiện nội dung còn yếu của AI.</li>
+                <li>Làm nền tảng cho phân tích và cải tiến chất lượng hệ thống.</li>
+              </ul>
             </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh1.png" alt="Tổng quan hệ thống"><figcaption>Hình 1. Giao diện tổng quan hệ thống</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">03 • Quản lý người dùng</span>
+              <h3>Phân quyền rõ ràng, hỗ trợ vận hành an toàn</h3>
+              <p>Chức năng quản lý người dùng cho phép tạo tài khoản, gán vai trò và kiểm soát trạng thái hoạt động, bảo đảm hệ thống vận hành đúng cơ chế phân quyền nội bộ.</p>
+              <ul>
+                <li>Phù hợp mô hình Admin và User.</li>
+                <li>Thuận lợi cho việc mở rộng người dùng theo đơn vị.</li>
+                <li>Tăng cường an toàn, kiểm soát truy cập.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh2.png" alt="Quản lý người dùng"><figcaption>Hình 2. Phân quyền và quản lý người dùng</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">04 • Chủ đề và nội dung</span>
+              <h3>Tổ chức tri thức theo chủ đề giúp AI trả lời đúng ngữ cảnh</h3>
+              <p>Quản trị viên có thể thêm chủ đề, mô tả, đặt chế độ công khai và tạo các nội dung chi tiết theo từng nhóm tri thức phục vụ học tập.</p>
+              <ul>
+                <li>Dễ mở rộng theo từng giai đoạn triển khai.</li>
+                <li>Hỗ trợ mô tả tóm tắt để AI hiểu tốt hơn.</li>
+                <li>Tạo cấu trúc dữ liệu khoa học, thuận lợi khai thác.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh4.png" alt="Quản lý chủ đề"><figcaption>Hình 4. Quản lý chủ đề</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">05 • Quản lý nội dung</span>
+              <h3>Xây dựng từng nội dung chi tiết gắn với chủ đề cụ thể</h3>
+              <p>Đây là khu vực nhập tên nội dung, tóm tắt và xác định mức độ công khai, giúp kho tri thức được tổ chức đầy đủ và có kiểm soát.</p>
+              <ul>
+                <li>Hỗ trợ tạo chương, bài học hoặc chuyên đề.</li>
+                <li>Phù hợp cho cả giáo viên và quản trị viên cập nhật tri thức.</li>
+                <li>Gắn chặt với logic hoạt động của Chatbot AI.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh5.png" alt="Quản lý nội dung"><figcaption>Hình 5. Quản lý nội dung</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">06 • Nạp tri thức AI</span>
+              <h3>Kho dữ liệu nền để Chatbot khai thác và trả lời</h3>
+              <p>Chức năng nạp tri thức giúp quản trị viên đưa tài liệu vào hệ thống, phân loại theo chủ đề và nội dung, tạo nền tảng dữ liệu để AI hiểu và phản hồi hiệu quả.</p>
+              <ul>
+                <li>Hỗ trợ nạp văn bản và tệp tri thức.</li>
+                <li>Tăng khả năng bao phủ kiến thức của AI.</li>
+                <li>Cho phép quản lý tài liệu đã nạp một cách tập trung.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh6.png" alt="Nạp tri thức AI"><figcaption>Hình 6. Nạp tri thức AI</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">07 • Q&amp;A Training</span>
+              <h3>Chuẩn hóa câu hỏi – đáp để nâng cao độ chính xác</h3>
+              <p>Bộ công cụ Q&amp;A Training cho phép xây dựng các cặp câu hỏi – trả lời chuẩn, sát thực tế sử dụng, giúp hệ thống phản hồi ổn định và nhất quán hơn.</p>
+              <ul>
+                <li>Tối ưu các câu trả lời quan trọng, thường gặp.</li>
+                <li>Dễ lọc theo chủ đề và nội dung.</li>
+                <li>Phù hợp quá trình hiệu chỉnh AI theo thực tiễn sử dụng.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh7.png" alt="Q&A Training"><figcaption>Hình 7. Q&amp;A Training</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">08 • Prompt mẫu</span>
+              <h3>Định hướng cách AI phản hồi theo phong cách mong muốn</h3>
+              <p>Prompt mẫu giúp kiểm soát văn phong, cách trình bày và mức độ chi tiết trong câu trả lời, từ đó làm cho hệ thống phản hồi phù hợp hơn với mục tiêu đào tạo.</p>
+              <ul>
+                <li>Tăng khả năng kiểm soát phản hồi của AI.</li>
+                <li>Hỗ trợ điều chỉnh theo từng nhóm người dùng.</li>
+                <li>Nâng cao tính ổn định và nhất quán của hệ thống.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh8.png" alt="Prompt mẫu"><figcaption>Hình 8. Prompt mẫu</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">09 • Xuất dataset training</span>
+              <h3>Chuẩn hóa dữ liệu để huấn luyện, sao lưu và mở rộng</h3>
+              <p>Chức năng xuất dataset training cho phép trích xuất dữ liệu tri thức, Q&amp;A và cấu hình liên quan phục vụ huấn luyện AI, sao lưu và chia sẻ nội bộ.</p>
+              <ul>
+                <li>Tái sử dụng dữ liệu linh hoạt cho các giai đoạn phát triển tiếp theo.</li>
+                <li>Thuận lợi cho sao lưu và bảo đảm an toàn dữ liệu.</li>
+                <li>Hỗ trợ mở rộng sang các mô hình AI khác khi cần.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh9.png" alt="Xuất dataset training"><figcaption>Hình 9. Xuất dataset training</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">10 • Gợi ý Q&amp;A</span>
+              <h3>Tự động gợi ý dữ liệu huấn luyện từ tương tác thực tế</h3>
+              <p>Hệ thống tự động tổng hợp những câu hỏi AI trả lời chưa tốt hoặc chưa đầy đủ để gợi ý bổ sung vào kho Q&amp;A chính thức, giúp cải tiến liên tục theo nhu cầu thực tế.</p>
+              <ul>
+                <li>Giảm công sức tạo dữ liệu thủ công.</li>
+                <li>Tập trung đúng các vấn đề người dùng quan tâm.</li>
+                <li>Rút ngắn chu trình cải tiến chất lượng AI.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh10.png" alt="Gợi ý Q&A"><figcaption>Hình 10. Gợi ý Q&amp;A</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">11 • Phân tích AI</span>
+              <h3>Đánh giá chất lượng phản hồi để tối ưu hệ thống</h3>
+              <p>Chức năng phân tích AI giúp thống kê phản hồi tốt, phản hồi cần sửa và phản hồi sai; từ đó hỗ trợ quản trị viên nhanh chóng xác định điểm yếu và đưa ra biện pháp cải tiến.</p>
+              <ul>
+                <li>Theo dõi chất lượng theo dữ liệu thực tế.</li>
+                <li>Hỗ trợ lãnh đạo và quản trị viên ra quyết định nhanh.</li>
+                <li>Gắn kết chặt với hoạt động huấn luyện và chuẩn hóa nội dung.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh11.png" alt="Phân tích AI"><figcaption>Hình 11. Phân tích AI</figcaption></figure></div>
+          </article>
+          <article class="slide">
+            <div class="slide-copy">
+              <span class="badge">12 • Chatbot AI</span>
+              <h3>Trung tâm cốt lõi của toàn bộ hệ thống</h3>
+              <p>Thông qua giao diện chat, người dùng có thể đặt câu hỏi, yêu cầu giải thích hoặc tra cứu thông tin. Hệ thống sử dụng kho tri thức đã quản lý để phản hồi đúng ngữ cảnh, nhanh chóng và thuận tiện.</p>
+              <ul>
+                <li>Cho phép chat theo chủ đề, nội dung hoặc toàn hệ thống.</li>
+                <li>Hỗ trợ quản lý phiên chat và lưu trữ lịch sử hội thoại.</li>
+                <li>Thu thập dữ liệu thực tế phục vụ gợi ý Q&amp;A và phân tích AI.</li>
+              </ul>
+            </div>
+            <div class="slide-image"><figure><img src="assets/images/hinh12.png" alt="Chatbot AI"><figcaption>Hình 12. Chức năng Chatbot AI</figcaption></figure></div>
+          </article>
         </div>
-    </main>
+        <div class="slide-controls">
+          <div class="dots" id="dots"></div>
+          <div class="ctrls">
+            <button class="ctrl-btn" id="prevBtn">◀ Trước</button>
+            <button class="ctrl-btn" id="nextBtn">Tiếp ▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 Khoa Ngoại Ngữ - Tin học. All rights reserved.</p>
-    </footer>
+    <section id="tinh-nang" class="container reveal">
+      <div class="section-top">
+        <div>
+          <span class="tagline">Cấu trúc chức năng</span>
+          <h2>5. Nhóm chức năng chính của hệ thống</h2>
+          <p>Nội dung dưới đây được tổ chức lại theo nhóm logic để trình bày rõ ràng hơn, kết hợp ảnh chụp giao diện thực tế nhằm tạo ấn tượng trực quan và chuyên nghiệp.</p>
+        </div>
+      </div>
 
-    <script>
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            if (password === '123') {
-                document.getElementById('welcome-screen').style.display = 'none';
-            } else {
-                alert('Mật khẩu sai!');
-            }
-        }
+      <article class="feature-card reveal">
+        <div class="feature-copy">
+          <span class="index">1</span>
+          <h3>Giao diện chung và trải nghiệm người dùng</h3>
+          <p>Giao diện hệ thống được thiết kế thân thiện, trực quan và dễ sử dụng. Người dùng có thể nhanh chóng lựa chọn chủ đề, nhập câu hỏi, theo dõi lịch sử hội thoại và tương tác với AI theo cách tự nhiên.</p>
+          <ul>
+            <li>Bố cục rõ ràng giữa menu chức năng, khu vực nhập liệu và vùng hiển thị kết quả.</li>
+            <li>Phù hợp cho cả học viên, giáo viên và quản trị viên.</li>
+            <li>Tăng trải nghiệm sử dụng, giảm thời gian làm quen với phần mềm.</li>
+          </ul>
+        </div>
+        <div class="feature-media"><img src="assets/images/hinh12.png" alt="Chatbot AI"></div>
+      </article>
 
-        const images = document.querySelectorAll('.slideshow img');
-        let currentImageIndex = 0;
+      <article class="feature-card reverse reveal">
+        <div class="feature-media"><img src="assets/images/hinh4.png" alt="Chủ đề"></div>
+        <div class="feature-copy">
+          <span class="index">2</span>
+          <h3>Quản trị hệ thống và tổ chức tri thức</h3>
+          <p>Nhóm chức năng quản trị cho phép tạo và quản lý người dùng, chủ đề, nội dung và cơ chế công khai dữ liệu. Đây là nền tảng bảo đảm hệ thống vận hành có trật tự, khoa học và an toàn.</p>
+          <ul>
+            <li>Phân quyền rõ ràng giữa Admin và User.</li>
+            <li>Tổ chức dữ liệu theo chủ đề và nội dung để AI trả lời đúng ngữ cảnh.</li>
+            <li>Dễ dàng mở rộng thêm môn học hoặc lĩnh vực kiến thức mới.</li>
+          </ul>
+        </div>
+      </article>
 
-        setInterval(() => {
-            images[currentImageIndex].style.display = 'none';
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            images[currentImageIndex].style.display = 'block';
-        }, 3000);
-    </script>
+      <article class="feature-card reveal">
+        <div class="feature-copy">
+          <span class="index">3</span>
+          <h3>Huấn luyện tri thức AI</h3>
+          <p>Đây là nhóm chức năng cốt lõi nhất của hệ thống, gồm nạp tri thức, Q&amp;A Training, prompt mẫu và xuất dataset training. Mục tiêu là xây dựng nền dữ liệu chất lượng cao để AI phản hồi chính xác, nhất quán và có kiểm soát.</p>
+          <ul>
+            <li>Cho phép nạp dữ liệu tri thức trực tiếp vào hệ thống.</li>
+            <li>Xây dựng bộ câu hỏi – đáp chuẩn phục vụ huấn luyện.</li>
+            <li>Định hướng phong cách trả lời bằng prompt mẫu.</li>
+            <li>Xuất dataset để sao lưu, tái sử dụng và mở rộng mô hình.</li>
+          </ul>
+        </div>
+        <div class="feature-media"><img src="assets/images/hinh6.png" alt="Nạp tri thức"></div>
+      </article>
+
+      <article class="feature-card reverse reveal">
+        <div class="feature-media"><img src="assets/images/hinh10.png" alt="Gợi ý Q&A"></div>
+        <div class="feature-copy">
+          <span class="index">4</span>
+          <h3>Phân tích, đánh giá và cải tiến liên tục</h3>
+          <p>Hệ thống không chỉ trả lời câu hỏi mà còn ghi nhận tương tác thực tế để gợi ý Q&amp;A mới, phân tích chất lượng phản hồi của AI và hỗ trợ quản trị viên xử lý các điểm yếu của hệ thống.</p>
+          <ul>
+            <li>Tự động hóa quá trình cải thiện dữ liệu huấn luyện.</li>
+            <li>Phân tích phản hồi tốt, cần sửa và chưa đạt.</li>
+            <li>Giúp lãnh đạo và giáo viên có căn cứ để điều chỉnh nội dung giảng dạy.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="feature-card reveal">
+        <div class="feature-copy">
+          <span class="index">5</span>
+          <h3>Khai thác tri thức và hỗ trợ học tập</h3>
+          <p>Tra cứu tài liệu và Chatbot AI là hai chức năng trực tiếp phục vụ người học. Người dùng có thể tìm kiếm, hỏi đáp, luyện tập và tiếp cận tri thức nhanh chóng mà không phải phụ thuộc vào nhiều nguồn rời rạc.</p>
+          <ul>
+            <li>Tối ưu khả năng tự học, tự tra cứu và giải quyết vấn đề.</li>
+            <li>Giảm áp lực cho giáo viên trong việc hỗ trợ ngoài giờ học.</li>
+            <li>Nâng cao tính chủ động và hứng thú học tập của học viên.</li>
+          </ul>
+        </div>
+        <div class="feature-media"><img src="assets/images/hinh11.png" alt="Tra cứu tài liệu"></div>
+      </article>
+    </section>
+
+    <section id="hieu-qua" class="container reveal">
+      <div class="section-top">
+        <div>
+          <span class="tagline">Giá trị mang lại</span>
+          <h2>6. Hiệu quả đạt được và khả năng mở rộng</h2>
+          <p>Sau quá trình nghiên cứu, xây dựng và triển khai thử nghiệm, sáng kiến đã cho thấy hiệu quả rõ rệt trên nhiều phương diện: quản lý, giảng dạy, học tập, đổi mới công nghệ và khả năng nhân rộng.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <article class="section-card">
+          <h3>Đối với công tác quản lý và chỉ đạo</h3>
+          <ul>
+            <li>Chuẩn hóa và số hóa tri thức môn học thành kho dữ liệu tập trung.</li>
+            <li>Hỗ trợ lãnh đạo đánh giá nội dung học viên còn vướng mắc để điều chỉnh chỉ đạo phù hợp.</li>
+            <li>Thể hiện rõ hiệu quả ứng dụng AI vào giáo dục trong môi trường đặc thù có yêu cầu bảo mật cao.</li>
+            <li>Tạo cơ sở thực tiễn cho lộ trình xây dựng “Nhà trường thông minh”.</li>
+          </ul>
+        </article>
+        <article class="section-card">
+          <h3>Đối với giáo viên và học viên</h3>
+          <ul>
+            <li>Giảm tải các câu hỏi lặp lại, giúp giáo viên tập trung cho chuyên môn sâu.</li>
+            <li>Hỗ trợ học viên học tập mọi lúc, mọi nơi trong môi trường nội bộ.</li>
+            <li>Tăng khả năng tự học, tư duy giải quyết vấn đề và cá nhân hóa quá trình học tập.</li>
+            <li>Giảm phụ thuộc vào tài liệu rời rạc, nâng cao trải nghiệm học tập hiện đại.</li>
+          </ul>
+        </article>
+        <article class="section-card">
+          <h3>Hiệu quả về mặt công nghệ</h3>
+          <ul>
+            <li>Xây dựng thành công mô hình Chatbot AI hoạt động nội bộ, không phụ thuộc Internet.</li>
+            <li>Tạo nền tảng mở để tích hợp với các hệ thống như Smart School, quản lý đào tạo, ngân hàng đề thi.</li>
+            <li>Kiến trúc có khả năng bảo trì, cập nhật và mở rộng thuận lợi.</li>
+          </ul>
+        </article>
+        <article class="section-card">
+          <h3>Khả năng tiếp tục duy trì, phát triển</h3>
+          <ul>
+            <li>Phù hợp với hạ tầng hiện có, không yêu cầu đầu tư lớn.</li>
+            <li>Đội ngũ giáo viên và cán bộ kỹ thuật có thể chủ động vận hành, cập nhật dữ liệu tri thức.</li>
+            <li>Có thể mở rộng sang các môn học khác như Ngoại ngữ, Pháp luật, Nghiệp vụ Công an.</li>
+            <li>Có khả năng nhân rộng trong toàn trường và kết nối với hệ thống SSO nội bộ.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="container reveal">
+      <div class="section-top">
+        <div>
+          <span class="tagline">Thư viện hình ảnh</span>
+          <h2>7. Bộ ảnh giao diện tích hợp trong website</h2>
+          <p>Toàn bộ ảnh chụp thực tế trong file Word đã được tích hợp lại vào website để phục vụ mục đích trình bày, trình chiếu và giới thiệu sản phẩm một cách chuyên nghiệp hơn.</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <div class="gallery">
+          <div class="thumb"><img src="assets/images/hinh3.png" alt="thumb 1"><span>Đăng nhập</span></div>
+          <div class="thumb"><img src="assets/images/hinh1.png" alt="thumb 2"><span>Tổng quan</span></div>
+          <div class="thumb"><img src="assets/images/hinh4.png" alt="thumb 3"><span>Chủ đề</span></div>
+          <div class="thumb"><img src="assets/images/hinh5.png" alt="thumb 4"><span>Nội dung</span></div>
+          <div class="thumb"><img src="assets/images/hinh6.png" alt="thumb 5"><span>Nạp tri thức</span></div>
+          <div class="thumb"><img src="assets/images/hinh7.png" alt="thumb 6"><span>Q&amp;A Training</span></div>
+          <div class="thumb"><img src="assets/images/hinh8.png" alt="thumb 7"><span>Prompt mẫu</span></div>
+          <div class="thumb"><img src="assets/images/hinh9.png" alt="thumb 8"><span>Xuất dataset</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <h3>Chatbot AI hỗ trợ học tập môn Tin học</h3>
+        <p>Website giới thiệu đã được nâng cấp theo tông xanh Công an, tối ưu cho trình lãnh đạo với bố cục trang trọng, tiêu đề gọn hơn, hiệu ứng mượt và slideshow ảnh thật của phần mềm.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function checkPassword(){
+      const pass = document.getElementById('password').value.trim();
+      const err = document.getElementById('error');
+      if(pass === '123'){
+        document.getElementById('gate').classList.add('hidden');
+        document.body.classList.remove('locked');
+        err.textContent = '';
+      }else{
+        err.textContent = 'Mật khẩu chưa đúng. Vui lòng nhập lại.';
+      }
+    }
+
+    document.getElementById('password').addEventListener('keydown', function(e){
+      if(e.key === 'Enter') checkPassword();
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('show'); } });
+    }, {threshold: .12});
+    reveals.forEach(el=>io.observe(el));
+
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsWrap = document.getElementById('dots');
+    let current = 0;
+    let timer;
+
+    slides.forEach((_,i)=>{
+      const b = document.createElement('button');
+      b.className = 'dot' + (i===0 ? ' active' : '');
+      b.setAttribute('aria-label', 'Slide ' + (i+1));
+      b.addEventListener('click', ()=>goTo(i));
+      dotsWrap.appendChild(b);
+    });
+    const dots = Array.from(document.querySelectorAll('.dot'));
+
+    function renderSlides(){
+      slides.forEach((slide,i)=> slide.classList.toggle('active', i===current));
+      dots.forEach((dot,i)=> dot.classList.toggle('active', i===current));
+    }
+    function goTo(index){
+      current = (index + slides.length) % slides.length;
+      renderSlides();
+      restart();
+    }
+    function next(){ goTo(current + 1); }
+    function prev(){ goTo(current - 1); }
+    function restart(){ clearInterval(timer); timer = setInterval(next, 4500); }
+
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn').addEventListener('click', prev);
+    document.getElementById('slideView').addEventListener('mouseenter', ()=>clearInterval(timer));
+    document.getElementById('slideView').addEventListener('mouseleave', restart);
+    restart();
+  </script>
 </body>
 </html>
-
-
