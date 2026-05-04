@@ -36,7 +36,7 @@
 
     .gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(7,18,30,.40);backdrop-filter:blur(10px);z-index:50}
     .gate.hidden{display:none}
-    .gate-card{width:min(1040px,100%);display:grid;grid-template-columns:1.05fr .95fr;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.65);border-radius:30px;overflow:hidden;box-shadow:var(--shadow-lg)}
+    .gate-card{width:min(1040px,100%);display:grid;grid-template-columns:1.05fr .95fr;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.65);border-radius:30px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)}
     .gate-left{padding:48px;background:linear-gradient(135deg,#0f6b5c,#083a32 72%);color:#fff;position:relative;overflow:hidden}
     .gate-left:before,.gate-left:after{content:"";position:absolute;border-radius:50%;filter:blur(4px);opacity:.2}
     .gate-left:before{width:260px;height:260px;background:#6cc3ff;right:-90px;top:-40px}
@@ -70,7 +70,7 @@
 
     .container{max-width:var(--max);margin:auto;padding:0 22px}
     .hero{padding:34px 0 12px}
-    .hero-card{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch;background:linear-gradient(135deg,#fcfdfc,#f2f6f2 58%,#eaf0eb 100%);border:1px solid rgba(214,224,216,.9);box-shadow:var(--shadow-lg);border-radius:34px;padding:34px;overflow:hidden;position:relative}
+    .hero-card{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch;background:linear-gradient(135deg,#fcfdfc,#f2f6f2 58%,#eaf0eb 100%);border:1px solid rgba(214,224,216,.9);border-radius:28px;padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
     .hero-card:after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle, rgba(199,154,59,.16), transparent 68%)}
     .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:var(--accent-soft);color:#6f5119;font-weight:700;font-size:.88rem}
     .hero h1{font-size:clamp(1.8rem,3.2vw,3.1rem);line-height:1.14;margin:16px 0}
@@ -119,7 +119,7 @@
     .slide{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.06fr;opacity:0;visibility:hidden;transition:opacity .55s ease, visibility .55s ease}
     .slide.active{opacity:1;visibility:visible}
     .slide-copy{padding:38px 34px;color:#fff;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(8,56,43,.97),rgba(10,47,37,.94))}
-    .slide-copy .badge{display:inline-flex;width:max-content;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:8px 12px;border-radius:999px;font-size:.9rem;font-weight:700;margin-bottom:18px}
+    .slide-copy .badge{display:inline-flex;width:max-content;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:8px 12px;border-radius:999px;font-size:.9rem;font-weight:700;opacity:.94}
     .slide-copy h3{font-size:1.7rem;line-height:1.22;margin:0 0 12px}
     .slide-copy p{margin:0;color:rgba(255,255,255,.86);line-height:1.8}
     .slide-copy ul{margin:18px 0 0;padding-left:18px;line-height:1.75;color:rgba(255,255,255,.9)}
@@ -137,7 +137,7 @@
     .feature-card{padding:18px;display:grid;grid-template-columns:1fr 1.05fr;gap:22px;align-items:center;overflow:hidden}
     .feature-card.reverse{grid-template-columns:1.05fr 1fr}
     .feature-copy{padding:10px 6px 10px 6px}
-    .feature-copy .index{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:14px;background:#eaf6f4;color:var(--primary);font-weight:800;margin-bottom:12px}
+    .feature-copy .index{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:14px;background:#eaf6f4;color:var(--primary);font-weight:800;margin-bottom:10px}
     .feature-copy h3{margin:0 0 10px;font-size:1.24rem;line-height:1.3}
     .feature-copy p{margin:0;color:var(--muted);line-height:1.8}
     .feature-copy ul{margin:14px 0 0;padding-left:18px;color:var(--muted);line-height:1.8}
@@ -191,6 +191,9 @@
             <div style="opacity:.88;font-size:.9rem">Website giới thiệu sáng kiến</div>
           </div>
         </div>
+        <h1>Xây dựng Chatbot AI</h1>
+        <p>Hỗ trợ học tập môn Tin học trong môi trường nội bộ an toàn, hiệu quả và dễ sử dụng.</p>
+      </div>
       <div class="gate-right">
         <h2>Đăng nhập hệ thống</h2>
         <p>Vui lòng nhập mật khẩu để mở website giới thiệu sáng kiến.</p>
@@ -230,7 +233,7 @@
         <div>
           <span class="eyebrow">Sáng kiến chuyển đổi số giáo dục • Tông xanh Công an • AI nội bộ</span>
           <h1>Xây dựng Chatbot AI hỗ trợ học tập môn Tin học</h1>
-          <p>Hệ thống được nghiên cứu, xây dựng và phát triển nhằm hỗ trợ học viên hỏi đáp, tra cứu kiến thức, luyện tập và tương tác học tập một cách chủ động, linh hoạt; đồng thời đáp ứng yêu cầu bảo mật cao trong môi trường đào tạo nội bộ của Nhà trường.</p>
+          <p>Hệ thống được nghiên cứu, xây dựng và phát triển nhằm hỗ trợ học viên hỏi đáp, tra cứu kiến thức, luyện tập và tương tác học tập một cách linh hoạt và có hệ thống.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#giao-dien">Xem hình ảnh phần mềm</a>
             <a class="btn btn-outline" href="#tinh-nang">Khám phá tính năng</a>
@@ -266,18 +269,18 @@
         <div>
           <span class="tagline">Tổng quan sáng kiến</span>
           <h2>1. Giới thiệu chung</h2>
-          <p>Sáng kiến được hình thành từ yêu cầu thực tiễn trong giảng dạy môn Tin học và định hướng chuyển đổi số giáo dục, hướng tới mô hình học tập hiện đại, thông minh, lấy người học làm trung tâm.</p>
+          <p>Sáng kiến được hình thành từ yêu cầu thực tiễn trong giảng dạy môn Tin học và định hướng chuyển đổi số giáo dục, hướng tới mô hình học tập hiện đại.</p>
         </div>
       </div>
       <div class="grid grid-3">
         <article class="section-card">
-          <div class="kpi"><div class="num">01</div><div><h3>Bối cảnh hình thành</h3><p>Người học còn thiếu công cụ tương tác tức thời; việc giải đáp thắc mắc chưa kịp thời; khả năng cá nhân hóa học tập còn hạn chế; giáo viên chịu áp lực lớn trong hỗ trợ ngoài giờ học.</p></div></div>
+          <div class="kpi"><div class="num">01</div><div><h3>Bối cảnh hình thành</h3><p>Người học còn thiếu công cụ tương tác tức thời; việc giải đáp thắc mắc chưa kịp thời và có phụ thuộc vào tài liệu rời rạc.</p></div></div>
         </article>
         <article class="section-card">
-          <div class="kpi"><div class="num">02</div><div><h3>Mục tiêu chính</h3><p>Xây dựng hệ thống Chatbot AI nội bộ hỗ trợ hỏi đáp, tra cứu, luyện tập và khai thác tri thức nhanh chóng, chính xác, linh hoạt nhưng vẫn bảo đảm an toàn, bảo mật thông tin.</p></div></div>
+          <div class="kpi"><div class="num">02</div><div><h3>Mục tiêu chính</h3><p>Xây dựng hệ thống Chatbot AI nội bộ hỗ trợ hỏi đáp, tra cứu, luyện tập và khai thác tri thức hiệu quả.</p></div></div>
         </article>
         <article class="section-card">
-          <div class="kpi"><div class="num">03</div><div><h3>Ý nghĩa thực tiễn</h3><p>Không chỉ nâng cao hiệu quả dạy và học môn Tin học, sáng kiến còn là bước đi cụ thể trong lộ trình chuyển đổi số giáo dục, góp phần xây dựng “Nhà trường thông minh”.</p></div></div>
+          <div class="kpi"><div class="num">03</div><div><h3>Ý nghĩa thực tiễn</h3><p>Không chỉ nâng cao hiệu quả dạy và học, sáng kiến còn là bước đi cụ thể trong hành trình chuyển đổi số.</p></div></div>
         </article>
       </div>
     </section>
@@ -287,7 +290,7 @@
         <div>
           <span class="tagline">Khoảng trống cần giải quyết</span>
           <h2>2. Thực trạng khi chưa có sáng kiến</h2>
-          <p>Dù đã có nhiều giải pháp ứng dụng công nghệ thông tin, thực tiễn giảng dạy môn Tin học vẫn còn tồn tại những hạn chế đòi hỏi một công cụ hỗ trợ học tập thông minh, bảo mật và có thể triển khai nội bộ.</p>
+          <p>Dù đã có nhiều giải pháp ứng dụng công nghệ thông tin, thực tiễn giảng dạy môn Tin học vẫn còn tồn tại những hạn chế.</p>
         </div>
       </div>
       <div class="grid grid-2">
@@ -319,22 +322,22 @@
         <div>
           <span class="tagline">Kế hoạch triển khai</span>
           <h2>3. Lộ trình xây dựng và hoàn thiện</h2>
-          <p>Quá trình nghiên cứu, thiết kế, xây dựng và thử nghiệm hệ thống được triển khai theo từng giai đoạn rõ ràng, bảo đảm phù hợp với điều kiện thực tiễn của đơn vị.</p>
+          <p>Quá trình nghiên cứu, thiết kế, xây dựng và thử nghiệm hệ thống được triển khai theo từng giai đoạn rõ ràng.</p>
         </div>
       </div>
       <div class="timeline-card">
         <div class="timeline">
           <div class="timeline-item">
             <h4>Tháng 10/2025 — Khảo sát và xác định yêu cầu</h4>
-            <p>Tiến hành khảo sát thực tế, xác định ý tưởng, mục tiêu, phạm vi và yêu cầu nghiệp vụ đối với hệ thống Chatbot AI trong môi trường nội bộ có yêu cầu bảo mật cao.</p>
+            <p>Tiến hành khảo sát thực tế, xác định ý tưởng, mục tiêu, phạm vi và yêu cầu nghiệp vụ đối với hệ thống Chatbot AI.</p>
           </div>
           <div class="timeline-item">
             <h4>Từ tháng 11/2025 đến tháng 3/2026 — Thiết kế, xây dựng và chạy thử</h4>
-            <p>Thu thập, chuẩn hóa dữ liệu tri thức; xây dựng kiến trúc hệ thống; lập trình phiên bản demo; xin ý kiến góp ý của lãnh đạo, giáo viên; tổ chức thử nghiệm trong phạm vi hẹp và đánh giá sơ bộ hiệu quả.</p>
+            <p>Thu thập, chuẩn hóa dữ liệu tri thức; xây dựng kiến trúc hệ thống; lập trình phiên bản demo; xin ý kiến góp ý của lãnh đạo và giáo viên.</p>
           </div>
           <div class="timeline-item">
             <h4>Tháng 4/2026 — Hoàn thiện, đánh giá và đề xuất nghiệm thu</h4>
-            <p>Hoàn thiện hệ thống, đánh giá tổng thể mức độ đáp ứng yêu cầu thực tiễn, tiếp thu ý kiến các đơn vị liên quan và đề xuất nghiệm thu sáng kiến tại đơn vị.</p>
+            <p>Hoàn thiện hệ thống, đánh giá tổng thể mức độ đáp ứng yêu cầu thực tiễn và đề xuất nghiệm thu.</p>
           </div>
         </div>
       </div>
@@ -345,7 +348,7 @@
         <div>
           <span class="tagline">Slideshow ảnh phần mềm thực tế</span>
           <h2>4. Giao diện phần mềm nổi bật</h2>
-          <p>Khu vực trình chiếu dưới đây sử dụng trực tiếp các ảnh chụp trong tài liệu, kết hợp hiệu ứng chuyển cảnh mượt để phục vụ trình lãnh đạo, báo cáo nghiệm thu hoặc giới thiệu sản phẩm.</p>
+          <p>Khu vực trình chiếu dưới đây sử dụng trực tiếp các ảnh chụp từ hệ thống thực tế với hiệu ứng chuyển cảnh mượt.</p>
         </div>
       </div>
       <div class="slide-shell">
@@ -354,7 +357,7 @@
             <div class="slide-copy">
               <span class="badge">01 • Đăng nhập hệ thống</span>
               <h3>Điểm khởi đầu của toàn bộ trải nghiệm</h3>
-              <p>Người dùng đăng nhập để truy cập vào hệ thống Chatbot AI học tập. Giao diện sáng, rõ, dễ sử dụng, giúp tiếp cận nhanh các chức năng hỏi đáp và khai thác tri thức.</p>
+              <p>Người dùng đăng nhập để truy cập vào hệ thống Chatbot AI học tập. Giao diện sáng, rõ, dễ sử dụng.</p>
               <ul>
                 <li>Thiết kế đơn giản, trực quan.</li>
                 <li>Phù hợp triển khai trong môi trường nội bộ.</li>
@@ -367,7 +370,7 @@
             <div class="slide-copy">
               <span class="badge">02 • Trang tổng quan</span>
               <h3>Bảng điều khiển tổng hợp cho quản trị viên</h3>
-              <p>Dashboard cung cấp cái nhìn nhanh về số lượng chủ đề, nội dung tri thức, phản hồi AI và các nhóm câu hỏi nổi bật, giúp theo dõi hoạt động hệ thống tập trung.</p>
+              <p>Dashboard cung cấp cái nhìn nhanh về số lượng chủ đề, nội dung tri thức, phản hồi AI.</p>
               <ul>
                 <li>Thống kê nhanh phục vụ quản lý, chỉ đạo.</li>
                 <li>Hỗ trợ phát hiện nội dung còn yếu của AI.</li>
@@ -380,7 +383,7 @@
             <div class="slide-copy">
               <span class="badge">03 • Quản lý người dùng</span>
               <h3>Phân quyền rõ ràng, hỗ trợ vận hành an toàn</h3>
-              <p>Chức năng quản lý người dùng cho phép tạo tài khoản, gán vai trò và kiểm soát trạng thái hoạt động, bảo đảm hệ thống vận hành đúng cơ chế phân quyền nội bộ.</p>
+              <p>Chức năng quản lý người dùng cho phép tạo tài khoản, gán vai trò và kiểm soát trạng thái hoạt động.</p>
               <ul>
                 <li>Phù hợp mô hình Admin và User.</li>
                 <li>Thuận lợi cho việc mở rộng người dùng theo đơn vị.</li>
@@ -393,9 +396,9 @@
             <div class="slide-copy">
               <span class="badge">04 • Chủ đề và nội dung</span>
               <h3>Tổ chức tri thức theo chủ đề giúp AI trả lời đúng ngữ cảnh</h3>
-              <p>Quản trị viên có thể thêm chủ đề, mô tả, đặt chế độ công khai và tạo các nội dung chi tiết theo từng nhóm tri thức phục vụ học tập.</p>
+              <p>Quản trị viên có thể thêm chủ đề, mô tả, đặt chế độ công khai và tạo các nội dung chi tiết.</p>
               <ul>
-                <li>Dễ mở rộng theo từng giai đoạn triển khai.</li>
+                <li>Dễ mở rộng theo t��ng giai đoạn triển khai.</li>
                 <li>Hỗ trợ mô tả tóm tắt để AI hiểu tốt hơn.</li>
                 <li>Tạo cấu trúc dữ liệu khoa học, thuận lợi khai thác.</li>
               </ul>
@@ -406,7 +409,7 @@
             <div class="slide-copy">
               <span class="badge">05 • Quản lý nội dung</span>
               <h3>Xây dựng từng nội dung chi tiết gắn với chủ đề cụ thể</h3>
-              <p>Đây là khu vực nhập tên nội dung, tóm tắt và xác định mức độ công khai, giúp kho tri thức được tổ chức đầy đủ và có kiểm soát.</p>
+              <p>Đây là khu vực nhập tên nội dung, tóm tắt và xác định mức độ công khai.</p>
               <ul>
                 <li>Hỗ trợ tạo chương, bài học hoặc chuyên đề.</li>
                 <li>Phù hợp cho cả giáo viên và quản trị viên cập nhật tri thức.</li>
@@ -419,7 +422,7 @@
             <div class="slide-copy">
               <span class="badge">06 • Nạp tri thức AI</span>
               <h3>Kho dữ liệu nền để Chatbot khai thác và trả lời</h3>
-              <p>Chức năng nạp tri thức giúp quản trị viên đưa tài liệu vào hệ thống, phân loại theo chủ đề và nội dung, tạo nền tảng dữ liệu để AI hiểu và phản hồi hiệu quả.</p>
+              <p>Chức năng nạp tri thức giúp quản trị viên đưa tài liệu vào hệ thống, phân loại theo chủ đề.</p>
               <ul>
                 <li>Hỗ trợ nạp văn bản và tệp tri thức.</li>
                 <li>Tăng khả năng bao phủ kiến thức của AI.</li>
@@ -432,7 +435,7 @@
             <div class="slide-copy">
               <span class="badge">07 • Q&amp;A Training</span>
               <h3>Chuẩn hóa câu hỏi – đáp để nâng cao độ chính xác</h3>
-              <p>Bộ công cụ Q&amp;A Training cho phép xây dựng các cặp câu hỏi – trả lời chuẩn, sát thực tế sử dụng, giúp hệ thống phản hồi ổn định và nhất quán hơn.</p>
+              <p>Bộ công cụ Q&amp;A Training cho phép xây dựng các cặp câu hỏi – trả lời chuẩn.</p>
               <ul>
                 <li>Tối ưu các câu trả lời quan trọng, thường gặp.</li>
                 <li>Dễ lọc theo chủ đề và nội dung.</li>
@@ -445,7 +448,7 @@
             <div class="slide-copy">
               <span class="badge">08 • Prompt mẫu</span>
               <h3>Định hướng cách AI phản hồi theo phong cách mong muốn</h3>
-              <p>Prompt mẫu giúp kiểm soát văn phong, cách trình bày và mức độ chi tiết trong câu trả lời, từ đó làm cho hệ thống phản hồi phù hợp hơn với mục tiêu đào tạo.</p>
+              <p>Prompt mẫu giúp kiểm soát văn phong, cách trình bày và mức độ chi tiết trong câu trả lời.</p>
               <ul>
                 <li>Tăng khả năng kiểm soát phản hồi của AI.</li>
                 <li>Hỗ trợ điều chỉnh theo từng nhóm người dùng.</li>
@@ -458,7 +461,7 @@
             <div class="slide-copy">
               <span class="badge">09 • Xuất dataset training</span>
               <h3>Chuẩn hóa dữ liệu để huấn luyện, sao lưu và mở rộng</h3>
-              <p>Chức năng xuất dataset training cho phép trích xuất dữ liệu tri thức, Q&amp;A và cấu hình liên quan phục vụ huấn luyện AI, sao lưu và chia sẻ nội bộ.</p>
+              <p>Chức năng xuất dataset training cho phép trích xuất dữ liệu tri thức, Q&amp;A và cấu hình.</p>
               <ul>
                 <li>Tái sử dụng dữ liệu linh hoạt cho các giai đoạn phát triển tiếp theo.</li>
                 <li>Thuận lợi cho sao lưu và bảo đảm an toàn dữ liệu.</li>
@@ -471,7 +474,7 @@
             <div class="slide-copy">
               <span class="badge">10 • Gợi ý Q&amp;A</span>
               <h3>Tự động gợi ý dữ liệu huấn luyện từ tương tác thực tế</h3>
-              <p>Hệ thống tự động tổng hợp những câu hỏi AI trả lời chưa tốt hoặc chưa đầy đủ để gợi ý bổ sung vào kho Q&amp;A chính thức, giúp cải tiến liên tục theo nhu cầu thực tế.</p>
+              <p>Hệ thống tự động tổng hợp những câu hỏi AI trả lời chưa tốt để gợi ý bổ sung.</p>
               <ul>
                 <li>Giảm công sức tạo dữ liệu thủ công.</li>
                 <li>Tập trung đúng các vấn đề người dùng quan tâm.</li>
@@ -484,7 +487,7 @@
             <div class="slide-copy">
               <span class="badge">11 • Phân tích AI</span>
               <h3>Đánh giá chất lượng phản hồi để tối ưu hệ thống</h3>
-              <p>Chức năng phân tích AI giúp thống kê phản hồi tốt, phản hồi cần sửa và phản hồi sai; từ đó hỗ trợ quản trị viên nhanh chóng xác định điểm yếu và đưa ra biện pháp cải tiến.</p>
+              <p>Chức năng phân tích AI giúp thống kê phản hồi tốt, phản hồi cần sửa và phản hồi sai.</p>
               <ul>
                 <li>Theo dõi chất lượng theo dữ liệu thực tế.</li>
                 <li>Hỗ trợ lãnh đạo và quản trị viên ra quyết định nhanh.</li>
@@ -497,7 +500,7 @@
             <div class="slide-copy">
               <span class="badge">12 • Chatbot AI</span>
               <h3>Trung tâm cốt lõi của toàn bộ hệ thống</h3>
-              <p>Thông qua giao diện chat, người dùng có thể đặt câu hỏi, yêu cầu giải thích hoặc tra cứu thông tin. Hệ thống sử dụng kho tri thức đã quản lý để phản hồi đúng ngữ cảnh, nhanh chóng và thuận tiện.</p>
+              <p>Thông qua giao diện chat, người dùng có thể đặt câu hỏi, yêu cầu giải thích hoặc tra cứu thông tin.</p>
               <ul>
                 <li>Cho phép chat theo chủ đề, nội dung hoặc toàn hệ thống.</li>
                 <li>Hỗ trợ quản lý phiên chat và lưu trữ lịch sử hội thoại.</li>
@@ -522,7 +525,7 @@
         <div>
           <span class="tagline">Cấu trúc chức năng</span>
           <h2>5. Nhóm chức năng chính của hệ thống</h2>
-          <p>Nội dung dưới đây được tổ chức lại theo nhóm logic để trình bày rõ ràng hơn, kết hợp ảnh chụp giao diện thực tế nhằm tạo ấn tượng trực quan và chuyên nghiệp.</p>
+          <p>Nội dung dưới đây được tổ chức lại theo nhóm logic để trình bày rõ ràng hơn.</p>
         </div>
       </div>
 
@@ -530,7 +533,7 @@
         <div class="feature-copy">
           <span class="index">1</span>
           <h3>Giao diện chung và trải nghiệm người dùng</h3>
-          <p>Giao diện hệ thống được thiết kế thân thiện, trực quan và dễ sử dụng. Người dùng có thể nhanh chóng lựa chọn chủ đề, nhập câu hỏi, theo dõi lịch sử hội thoại và tương tác với AI theo cách tự nhiên.</p>
+          <p>Giao diện hệ thống được thiết kế thân thiện, trực quan và dễ sử dụng.</p>
           <ul>
             <li>Bố cục rõ ràng giữa menu chức năng, khu vực nhập liệu và vùng hiển thị kết quả.</li>
             <li>Phù hợp cho cả học viên, giáo viên và quản trị viên.</li>
@@ -545,7 +548,7 @@
         <div class="feature-copy">
           <span class="index">2</span>
           <h3>Quản trị hệ thống và tổ chức tri thức</h3>
-          <p>Nhóm chức năng quản trị cho phép tạo và quản lý người dùng, chủ đề, nội dung và cơ chế công khai dữ liệu. Đây là nền tảng bảo đảm hệ thống vận hành có trật tự, khoa học và an toàn.</p>
+          <p>Nhóm chức năng quản trị cho phép tạo và quản lý người dùng, chủ đề, nội dung.</p>
           <ul>
             <li>Phân quyền rõ ràng giữa Admin và User.</li>
             <li>Tổ chức dữ liệu theo chủ đề và nội dung để AI trả lời đúng ngữ cảnh.</li>
@@ -558,7 +561,7 @@
         <div class="feature-copy">
           <span class="index">3</span>
           <h3>Huấn luyện tri thức AI</h3>
-          <p>Đây là nhóm chức năng cốt lõi nhất của hệ thống, gồm nạp tri thức, Q&amp;A Training, prompt mẫu và xuất dataset training. Mục tiêu là xây dựng nền dữ liệu chất lượng cao để AI phản hồi chính xác, nhất quán và có kiểm soát.</p>
+          <p>Nhóm chức năng cốt lõi gồm nạp tri thức, Q&amp;A Training, prompt mẫu và xuất dataset training.</p>
           <ul>
             <li>Cho phép nạp dữ liệu tri thức trực tiếp vào hệ thống.</li>
             <li>Xây dựng bộ câu hỏi – đáp chuẩn phục vụ huấn luyện.</li>
@@ -574,7 +577,7 @@
         <div class="feature-copy">
           <span class="index">4</span>
           <h3>Phân tích, đánh giá và cải tiến liên tục</h3>
-          <p>Hệ thống không chỉ trả lời câu hỏi mà còn ghi nhận tương tác thực tế để gợi ý Q&amp;A mới, phân tích chất lượng phản hồi của AI và hỗ trợ quản trị viên xử lý các điểm yếu của hệ thống.</p>
+          <p>Hệ thống không chỉ trả lời câu hỏi mà còn ghi nhận tương tác thực tế.</p>
           <ul>
             <li>Tự động hóa quá trình cải thiện dữ liệu huấn luyện.</li>
             <li>Phân tích phản hồi tốt, cần sửa và chưa đạt.</li>
@@ -587,7 +590,7 @@
         <div class="feature-copy">
           <span class="index">5</span>
           <h3>Khai thác tri thức và hỗ trợ học tập</h3>
-          <p>Tra cứu tài liệu và Chatbot AI là hai chức năng trực tiếp phục vụ người học. Người dùng có thể tìm kiếm, hỏi đáp, luyện tập và tiếp cận tri thức nhanh chóng mà không phải phụ thuộc vào nhiều nguồn rời rạc.</p>
+          <p>Tra cứu tài liệu và Chatbot AI là hai chức năng trực tiếp phục vụ người học.</p>
           <ul>
             <li>Tối ưu khả năng tự học, tự tra cứu và giải quyết vấn đề.</li>
             <li>Giảm áp lực cho giáo viên trong việc hỗ trợ ngoài giờ học.</li>
@@ -603,7 +606,7 @@
         <div>
           <span class="tagline">Giá trị mang lại</span>
           <h2>6. Hiệu quả đạt được và khả năng mở rộng</h2>
-          <p>Sau quá trình nghiên cứu, xây dựng và triển khai thử nghiệm, sáng kiến đã cho thấy hiệu quả rõ rệt trên nhiều phương diện: quản lý, giảng dạy, học tập, đổi mới công nghệ và khả năng nhân rộng.</p>
+          <p>Sau quá trình nghiên cứu, xây dựng và triển khai thử nghiệm, sáng kiến đã cho thấy hiệu quả rõ rệt.</p>
         </div>
       </div>
       <div class="grid grid-2">
@@ -611,9 +614,9 @@
           <h3>Đối với công tác quản lý và chỉ đạo</h3>
           <ul>
             <li>Chuẩn hóa và số hóa tri thức môn học thành kho dữ liệu tập trung.</li>
-            <li>Hỗ trợ lãnh đạo đánh giá nội dung học viên còn vướng mắc để điều chỉnh chỉ đạo phù hợp.</li>
-            <li>Thể hiện rõ hiệu quả ứng dụng AI vào giáo dục trong môi trường đặc thù có yêu cầu bảo mật cao.</li>
-            <li>Tạo cơ sở thực tiễn cho lộ trình xây dựng “Nhà trường thông minh”.</li>
+            <li>Hỗ trợ lãnh đạo đánh giá nội dung học viên còn vướng mắc.</li>
+            <li>Thể hiện rõ hiệu quả ứng dụng AI vào giáo dục.</li>
+            <li>Tạo cơ sở thực tiễn cho lộ trình xây dựng "Nhà trường thông minh".</li>
           </ul>
         </article>
         <article class="section-card">
@@ -621,15 +624,15 @@
           <ul>
             <li>Giảm tải các câu hỏi lặp lại, giúp giáo viên tập trung cho chuyên môn sâu.</li>
             <li>Hỗ trợ học viên học tập mọi lúc, mọi nơi trong môi trường nội bộ.</li>
-            <li>Tăng khả năng tự học, tư duy giải quyết vấn đề và cá nhân hóa quá trình học tập.</li>
-            <li>Giảm phụ thuộc vào tài liệu rời rạc, nâng cao trải nghiệm học tập hiện đại.</li>
+            <li>Tăng khả năng tự học, tư duy giải quyết vấn đề.</li>
+            <li>Giảm phụ thuộc vào tài liệu rời rạc, nâng cao trải nghiệm học tập.</li>
           </ul>
         </article>
         <article class="section-card">
           <h3>Hiệu quả về mặt công nghệ</h3>
           <ul>
-            <li>Xây dựng thành công mô hình Chatbot AI hoạt động nội bộ, không phụ thuộc Internet.</li>
-            <li>Tạo nền tảng mở để tích hợp với các hệ thống như Smart School, quản lý đào tạo, ngân hàng đề thi.</li>
+            <li>Xây dựng thành công mô hình Chatbot AI hoạt động nội bộ.</li>
+            <li>Tạo nền tảng mở để tích hợp với các hệ thống khác.</li>
             <li>Kiến trúc có khả năng bảo trì, cập nhật và mở rộng thuận lợi.</li>
           </ul>
         </article>
@@ -637,9 +640,9 @@
           <h3>Khả năng tiếp tục duy trì, phát triển</h3>
           <ul>
             <li>Phù hợp với hạ tầng hiện có, không yêu cầu đầu tư lớn.</li>
-            <li>Đội ngũ giáo viên và cán bộ kỹ thuật có thể chủ động vận hành, cập nhật dữ liệu tri thức.</li>
-            <li>Có thể mở rộng sang các môn học khác như Ngoại ngữ, Pháp luật, Nghiệp vụ Công an.</li>
-            <li>Có khả năng nhân rộng trong toàn trường và kết nối với hệ thống SSO nội bộ.</li>
+            <li>Đội ngũ giáo viên và cán bộ kỹ thuật có thể chủ động vận hành.</li>
+            <li>Có thể mở rộng sang các môn học khác.</li>
+            <li>Có khả năng nhân rộng trong toàn trường.</li>
           </ul>
         </article>
       </div>
@@ -650,7 +653,6 @@
         <div>
           <span class="tagline">Thư viện hình ảnh</span>
           <h2>7. Bộ ảnh giao diện tích hợp trong website</h2>
-        
         </div>
       </div>
       <div class="gallery-card">
@@ -672,7 +674,7 @@
     <div class="container">
       <div class="footer-card">
         <h3>Chatbot AI hỗ trợ học tập môn Tin học</h3>
-       
+        <p>Website giới thiệu sáng kiến năm 2026 - Tạo công cụ học tập hiệu quả cho thế hệ tương lai</p>
       </div>
     </div>
   </footer>
