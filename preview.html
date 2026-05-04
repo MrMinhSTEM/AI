@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview - Chatbot AI hỗ trợ học tập môn Tin học</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+    
+    .preview-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .preview-header {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .preview-header h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #0b5a43;
+    }
+
+    .preview-header p {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .preview-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preview-links a {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #0b5a43;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .preview-links a:hover {
+      background: #08382b;
+    }
+
+    .preview-links a.secondary {
+      background: #f0f0f0;
+      color: #0b5a43;
+      border: 1px solid #ddd;
+    }
+
+    .preview-links a.secondary:hover {
+      background: #e8e8e8;
+    }
+
+    .iframe-container {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+
+    .iframe-header {
+      background: #f9f9f9;
+      padding: 15px 20px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .iframe-header h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .iframe-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .iframe-actions button {
+      padding: 6px 12px;
+      background: #0b5a43;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .iframe-actions button:hover {
+      background: #08382b;
+    }
+
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+      display: block;
+    }
+
+    .info-box {
+      background: #e8f4f0;
+      border-left: 4px solid #0b5a43;
+      padding: 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .info-box h4 {
+      color: #0b5a43;
+      margin-bottom: 8px;
+    }
+
+    .info-box p {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .feature-card h4 {
+      color: #0b5a43;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .feature-card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer-info {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      iframe {
+        height: 600px;
+      }
+
+      .preview-links {
+        flex-direction: column;
+      }
+
+      .preview-links a {
+        display: block;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-container">
+    <div class="preview-header">
+      <h1>🚀 Preview - Chatbot AI hỗ trợ học tập môn Tin học</h1>
+      <p>Đây là giao diện xem trước (preview) của website giới thiệu sáng kiến. Bạn có thể xem đầy đủ nội dung, thiết kế và tương tác với các thành phần của trang web.</p>
+      
+      <div class="preview-links">
+        <a href="index.html" target="_blank">📄 Xem trang chính</a>
+        <a href="https://github.com/MrMinhSTEM/AI" target="_blank">🐙 Xem trên GitHub</a>
+        <a href="https://github.com/MrMinhSTEM/AI/blob/master/index.html" target="_blank">💾 Xem source code</a>
+        <a href="#" class="secondary" onclick="document.querySelector('iframe').src=document.querySelector('iframe').src">🔄 Tải lại</a>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h4>ℹ️ Về Preview này</h4>
+      <p><strong>Mật khẩu đăng nhập:</strong> <code>123</code> (như cấu hình trong hệ thống)</p>
+      <p><strong>Lưu ý:</strong> Hình ảnh sẽ không hiển thị vì folder <code>assets/images/</code> chưa được tải lên. Để sử dụng đầy đủ, bạn cần thêm các file ảnh vào thư mục này.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>✨ Giao diện hiện đại</h4>
+        <p>Thiết kế đẹp với gradient, animation và hiệu ứng mượt mà. Thân thiện với người dùng trên mọi thiết bị.</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>🔐 Bảo vệ mật khẩu</h4>
+        <p>Website có hệ thống đăng nhập bảo vệ nội dung. Mật khẩu mặc định: 123</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>📱 Responsive Design</h4>
+        <p>Tự động thích ứng với kích thước màn hình: desktop, tablet, mobile.</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>🎬 Slideshow ảnh</h4>
+        <p>12 ảnh giao diện được trình chiếu với hiệu ứng chuyển cảnh tự động.</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>⚡ Hiệu ứng Scroll</h4>
+        <p>Các section xuất hiện khi cuộn trang với hiệu ứng fade-in đẹp mắt.</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>📊 Nội dung đầy đủ</h4>
+        <p>7 section chính: Giới thiệu, Thực trạng, Lộ trình, Giao diện, Tính năng, Hiệu quả, Thư viện ảnh.</p>
+      </div>
+    </div>
+
+    <div class="iframe-container">
+      <div class="iframe-header">
+        <h3>🌐 Xem trước giao diện</h3>
+        <div class="iframe-actions">
+          <button onclick="openFullscreen()">Xem toàn màn hình</button>
+        </div>
+      </div>
+      <iframe id="previewFrame" src="index.html"></iframe>
+    </div>
+
+    <div class="footer-info">
+      <p>Được tạo bởi <strong>MrMinhSTEM</strong> | Sáng kiến năm 2026</p>
+      <p>📧 Liên hệ: GitHub @MrMinhSTEM | 🔗 <a href="https://github.com/MrMinhSTEM/AI" style="color: #0b5a43; text-decoration: none; font-weight: 600;">Xem repository</a></p>
+    </div>
+  </div>
+
+  <script>
+    function openFullscreen() {
+      const iframe = document.getElementById('previewFrame');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      } else {
+        // Nếu fullscreen API không hỗ trợ, mở trong tab mới
+        window.open('index.html', '_blank');
+      }
+    }
+  </script>
+</body>
+</html>
